@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/Acer%20Predator/Downloads/swp/web/theaters.jsp</file>
+            <file>file:/C:/Users/Acer%20Predator/Downloads/swp/src/java/controller/VerifyOTPController.java</file>
+            <file>file:/C:/Users/Acer%20Predator/Downloads/swp/src/java/controller/BillDetailServlet.java</file>
+            <file>file:/C:/Users/Acer%20Predator/Downloads/swp/src/java/controller/AddMovieServlet.java</file>
+            <file>file:/C:/Users/Acer%20Predator/Downloads/swp/src/java/controller/TheaterFilterServlet.java</file>
+            <file>file:/C:/Users/Acer%20Predator/Downloads/swp/src/java/controller/ViewProfileServlet.java</file>
+            <file>file:/C:/Users/Acer%20Predator/Downloads/swp/web/theaterinfo.jsp</file>
+            <file>file:/C:/Users/Acer%20Predator/Downloads/swp/src/java/model/Cinema.java</file>
+            <file>file:/C:/Users/Acer%20Predator/Downloads/swp/src/java/controller/TheaterInfoServlet.java</file>
+            <file>file:/C:/Users/Acer%20Predator/Downloads/swp/src/java/controller/RegisterController.java</file>
+            <file>file:/C:/Users/Acer%20Predator/Downloads/swp/src/java/controller/AddDiscountServlet.java</file>
+            <file>file:/C:/Users/Acer%20Predator/Downloads/swp/src/java/dal/CinemaDAO.java</file>
+            <file>file:/C:/Users/Acer%20Predator/Downloads/swp/src/java/controller/UpdateProfileServlet.java</file>
+            <file>file:/C:/Users/Acer%20Predator/Downloads/swp/src/java/dal/MovieDAO.java</file>
+            <file>file:/C:/Users/Acer%20Predator/Downloads/swp/src/java/model/Movie.java</file>
+        </group>
+    </open-files>
+</project-private>

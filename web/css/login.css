@@ -1,0 +1,256 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Feb 15, 2025, 11:09:32 PM
+    Author     : ADMIN
+*/
+
+/* Reset chung và box-sizing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f6f5f7;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    flex-direction: column; /* Sắp xếp các phần tử theo chiều dọc */
+    justify-content: space-between; /* Đảm bảo các phần tử được phân bố đều */
+    min-height: 100vh; /* Chiều cao tối thiểu của body là 100% chiều cao màn hình */
+    margin: 0;
+}
+h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+form {
+    background-color: #fff;
+    padding: 40px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #f9f9f9;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #FF4B2B;
+    border: none;
+    border-radius: 25px;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #e13b22;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+a {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #FF4B2B;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Kiểu hiển thị thông báo lỗi */
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* Nút "Sign In" cho người dùng chưa có tài khoản */
+button.sign-in-button {
+    background-color: #DD416c;
+    border-radius: 25px;
+}
+
+button.sign-in-button:hover {
+    background-color: #c83e5c;
+}
+
+button.sign-in-button:active {
+    transform: scale(0.98);
+}
+
+/* Các nút đăng nhập qua mạng xã hội */
+.social-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.social {
+    font-size: 1.5rem;
+    color: #555;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.social:hover {
+    background-color: #ddd;
+}
+
+.social i {
+    color: #fff;
+}
+
+.social.facebook {
+    background-color: #3b5998;
+}
+
+.social.google {
+    background-color: #db4437;
+}
+
+.social.linkedin {
+    background-color: #0077b5;
+}
+
+.social.facebook:hover {
+    background-color: #2d4373;
+}
+
+.social.google:hover {
+    background-color: #c1351d;
+}
+
+.social.linkedin:hover {
+    background-color: #00659c;
+}
+
+/* Điều chỉnh container */
+.container {
+    flex: 1; /* Đảm bảo phần chứa form đăng nhập chiếm phần còn lại trong body */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+.text-center {
+    text-align: center;
+}
+    /* Tạo nền xám cho các ô nhập liệu và thêm viền */
+input.form-control {
+    background-color: #f0f0f0; /* Màu xám nhạt */
+    border: 1px solid #ccc; /* Viền xám */
+    padding: 8px; /* Khoảng cách bên trong */
+    border-radius: 4px; /* Viền bo tròn */
+}
+
+/* Khi focus vào ô nhập liệu, thay đổi viền */
+input.form-control:focus {
+    background-color: #e0e0e0; /* Màu xám đậm hơn khi focus */
+    border-color: #007bff; /* Viền màu xanh khi focus */
+    outline: none; /* Loại bỏ outline mặc định */
+}
+
+/* Có thể thêm một số hiệu ứng khác nếu muốn */
+input.form-control:focus, input.form-control:hover {
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Hiệu ứng bóng mờ khi focus hoặc hover */
+}
+.mb-3 {
+    margin-bottom: 1.5rem; /* Tăng khoảng cách giữa các label và input */
+}
+
+/* Điều chỉnh kích thước label và input */
+.form-label {
+    font-size: 1rem; /* Cỡ chữ label */
+    margin-bottom: 0.5rem; /* Khoảng cách giữa label và input */
+}
+
+.form-control {
+    font-size: 1rem; /* Cỡ chữ input */
+    padding: 0.75rem; /* Padding bên trong input */
+    height: calc(1.5em + 0.75rem + 2px); /* Chiều cao input (tùy chỉnh theo ý muốn) */
+}
+
+/* Style cho select (gender) */
+.form-control#gender { /* Chỉ định style cho select#gender */
+    -webkit-appearance: none; /* Loại bỏ style mặc định của select trên WebKit browsers */
+    -moz-appearance: none; /* Loại bỏ style mặc định của select trên Firefox */
+    appearance: none; /* Loại bỏ style mặc định của select */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l8 8 8-8'/%3e%3c/svg%3e"); /* Thêm icon mũi tên vào select */
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1rem 1rem;
+    padding-right: 2rem; /* Điều chỉnh padding để không che mất icon */
+}
+
+/* Style cho button */
+button[type="submit"] { /* Style cho button submit */
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem; /* Padding cho button */
+}
+.form-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l8 8 8-8'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1rem 1rem;
+    padding: 0.75rem 2rem 0.75rem 0.75rem; /* Điều chỉnh padding */
+    height: auto; /* Điều chỉnh chiều cao */
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    background-color: #fff;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-select:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+.form-select {
+    overflow: auto;
+}
+.forgot-password {
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 14px;
+    color: red; /* Thay đổi màu chữ thành đỏ */
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    text-decoration: underline; /* Gạch chân khi hover */
+}

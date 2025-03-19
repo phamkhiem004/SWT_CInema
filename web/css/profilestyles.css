@@ -1,0 +1,346 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    line-height: 1.6;
+}
+
+
+
+
+
+/* //Container chính bao quanh 2 phần 
+.main-container {
+    display: flex;
+    justify-content: space-between;  //Chia đều không gian giữa 2 phần 
+    gap: 20px;  //Khoảng cách giữa 2 phần 
+    padding: 20px;
+    max-width: 1000px;  //Điều chỉnh chiều rộng của toàn bộ container 
+    margin: 0 auto;  //Căn giữa màn hình 
+}
+
+ //Container chỉnh sửa thông tin bên trái 
+.left-container {
+    flex: 1;  //Phần bên trái chiếm 50% chiều rộng 
+    padding: 25px;  //Giảm padding để container nhỏ hơn 
+    background-color: white;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    max-width: 480px;  //Giới hạn chiều rộng tối đa 
+    width: 100%;  //Đảm bảo container sử dụng toàn bộ chiều rộng cho đến max-width 
+}
+
+.left-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 26px;  //Giảm kích thước tiêu đề 
+    color: #333;
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-size: 20px;  //Giảm kích thước subheading 
+    color: #333;
+}*/
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+
+form input, form select {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+
+form button {
+    padding: 10px 25px;
+    background-color: #ff7f00;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+form button:hover {
+    background-color: #e67200;
+}
+/*
+ //Container thay đổi mật khẩu bên phải 
+.right-container {
+    flex: 1;  //Phần bên phải chiếm 50% chiều rộng 
+    padding: 25px;  //Giảm padding để container nhỏ hơn 
+    background-color: white;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    max-width: 480px;  //Giới hạn chiều rộng tối đa 
+    width: 100%;  //Đảm bảo container sử dụng toàn bộ chiều rộng cho đến max-width 
+}
+
+.right-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 26px;  //Giảm kích thước tiêu đề 
+    color: #333;
+}
+
+footer {
+    text-align: center;
+    margin-top: 50px;
+    background-color: #333;
+    color: white;
+    padding: 15px 0;
+    font-size: 14px;
+}*/
+
+/*footer p {
+    margin: 0;
+}*/
+
+/* Reset cơ bản 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+ 🎬 Background toàn trang 
+*/body {
+    background: url('https://source.unsplash.com/1600x900/?movie,cinema') no-repeat center center/cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}/*
+
+
+
+ 📌 Container chính 
+*/.container {
+    display: flex;
+    width: 80%;
+    max-width: 1000px;
+    margin: 100px auto 20px auto;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}/*
+
+ 🎭 Chia màn hình thành 2 phần 
+*/.profile-container {
+    flex: 1;
+    padding: 20px;
+    border-right: 2px solid #ccc;
+}/*
+
+*/.password-container {
+    flex: 1;
+    padding: 20px;
+}/*
+
+ 🎬 Tiêu đề 
+*/h1 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #333;
+}/*
+
+ 🔹 Input Styles 
+*/input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+}/*
+
+ 📩 Nút Submit 
+*/button {
+    width: 100%;
+    padding: 12px;
+    background: #FF4500;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #D6341D;
+}/*
+
+ 🎞 Footer 
+
+
+ 🎟 Responsive 
+*/@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    .profile-container {
+        border-right: none;
+        border-bottom: 2px solid #ccc;
+        padding-bottom: 20px;
+    }
+}
+
+/* 🎬 Container lịch sử giao dịch */
+.history-container {
+    width: 80%;
+    max-width: 1000px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 🔍 Bộ lọc thời gian */
+.filter-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 8px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* 🌟 Label cho input */
+.filter-container label {
+    font-size: 14px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* 🌟 Input ngày */
+.filter-container input {
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* 🎨 Nút Lọc - Nhỏ gọn hơn */
+.filter-container button {
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: bold;
+    background: #FF5722;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.filter-container button:hover {
+    background: #E64A19;
+}
+
+/* 📌 Responsive */
+@media (max-width: 600px) {
+    .filter-container {
+        flex-direction: column;
+        gap: 5px;
+        align-items: flex-start;
+    }
+
+    .filter-container label {
+        margin-bottom: 2px;
+    }
+
+    .filter-container input,
+    .filter-container button {
+        width: 100%; /* Full width trên mobile */
+    }
+}
+
+/* 📋 Bảng lịch sử giao dịch */
+.transaction-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* 🌟 Header của bảng */
+.transaction-table thead {
+    background: #FF5722;
+    color: white;
+    text-align: left;
+}
+
+.transaction-table th, 
+.transaction-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* 🟢 Trạng thái thanh toán */
+.payment-status {
+    padding: 5px 8px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Màu sắc cho các trạng thái thanh toán */
+.paid { background: #4CAF50; color: white; }  /* Đã thanh toán */
+.pending { background: #FFC107; color: black; } /* Chờ xử lý */
+.failed { background: #F44336; color: white; } /* Thất bại */
+
+/* 🔍 Nút Xem Chi Tiết */
+.detail-btn {
+    padding: 6px 10px;
+    background: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: 0.3s;
+}
+
+.detail-btn:hover {
+    background: #1976D2;
+}
+
+/* 📌 Responsive */
+@media (max-width: 768px) {
+    .transaction-table th, 
+    .transaction-table td {
+        padding: 8px;
+        font-size: 14px;
+    }
+}
+
+

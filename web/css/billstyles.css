@@ -1,0 +1,110 @@
+/* 📄 Container chính */
+.bill-detail-container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 🎬 Layout poster + thông tin */
+.bill-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+/* 🖼 Poster phim */
+.movie-poster {
+    width: 250px;
+    height: 350px;
+    margin-top: 20px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* 📋 Bảng chung */
+.bill-table {
+    width: 100%;
+    margin-top: 15px;
+    border-collapse: collapse;
+    background: #f9f9f9;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 3px solid #FF5722; /* Border chính màu cam */
+}
+
+.bill-table th, .bill-table td {
+    padding: 12px;
+    border: 2px solid #ddd; /* Viền giữa các ô */
+    text-align: left;
+}
+
+.bill-table th {
+    background: #FF5722;
+    color: white;
+    font-size: 16px;
+}
+
+/* 📋 Bảng thông tin vé dạng dọc */
+.bill-info-table td {
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    border-bottom: 2px solid #ddd;
+}
+
+/* 💳 Trạng thái thanh toán */
+.payment-status {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Màu sắc cho các trạng thái thanh toán */
+.Paid { background: #4CAF50; color: white; }  /* Đã thanh toán */
+.Pending { background: #FFC107; color: black; } /* Chờ xử lý */
+.Failed { background: #F44336; color: white; } /* Thất bại */
+
+
+/* 📋 Bảng tổng tiền */
+.total-bill-container {
+    width: 97%;
+    margin-top: 20px;
+    padding: 15px;
+    background: #fff3e0;
+    border: 2px solid #FF5722;
+    border-radius: 8px;
+}
+
+.total-bill-container p {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    margin: 5px 0;
+    font-weight: bold;
+    color: #E53935;
+}
+
+
+/* 📌 Responsive */
+@media (max-width: 768px) {
+    .bill-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .movie-poster {
+        width: 200px;
+        height: 300px;
+    }
+
+    .bill-table th, .bill-table td {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
