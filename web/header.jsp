@@ -80,6 +80,7 @@
                 <li><a href="upcomingmovies.jsp">Phim Sắp Chiếu</a></li>
                 <li><a href="theaterfilter">Rạp Chiếu</a></li>
                 <li><a href="discounts.jsp">Khuyến Mãi</a></li>
+                <li><a href="combos.jsp">Combo</a></li>
                 <li><a href="viewprofile">Tài Khoản</a></li>
 
             </ul>

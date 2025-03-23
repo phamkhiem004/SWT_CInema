@@ -34,6 +34,36 @@ public class Movie {
         this.Title = Title;
         this.Poster = Poster;
     }
+    public Movie(int MovieID, String Title, String Genre, String Summary, int Duration, Date ReleaseDate, String TrailerURL, Timestamp CreatedAt, Timestamp UpdatedAt, String ImageURL, String Status) {
+        this.MovieID = MovieID;
+        this.Title = Title;
+        this.Genre = Genre;
+        this.Description = Summary;
+        this.Duration = Duration;
+        this.ReleaseDate = ReleaseDate;
+        this.Trailer = TrailerURL;
+        this.CreatedAt = CreatedAt;
+        this.UpdatedAt = UpdatedAt;
+        this.Poster = ImageURL;
+        this.Status = Status;
+    }
+
+    public Movie(int MovieID, String Title, String Genre, int Duration, String Description, String Poster, String Trailer, Date ReleaseDate, Timestamp CreatedAt, Timestamp UpdatedAt, String Status) {
+        this.MovieID = MovieID;
+        this.Title = Title;
+        this.Genre = Genre;
+        this.Duration = Duration;
+        this.Description = Description;
+        this.Poster = Poster;
+        this.Trailer = Trailer;
+        this.ReleaseDate = ReleaseDate;
+        this.CreatedAt = CreatedAt;
+        this.UpdatedAt = UpdatedAt;
+        this.Status = Status;
+    }
+
+    
+    
 
     public Movie(int MovieID, String Title, String Genre, int Duration, String Description, String Poster, String Trailer, Date ReleaseDate, String TrangThai, Timestamp CreatedAt, Timestamp UpdatedAt, String Status) {
         this.MovieID = MovieID;

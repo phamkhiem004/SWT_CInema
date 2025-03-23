@@ -24,6 +24,16 @@ import model.ShowTime;
  */
 public class CinemaDAO extends DBContext {
 
+    private Connection conn;
+
+    public CinemaDAO(Connection conn) {
+        this.conn = conn;
+    }
+
+    public CinemaDAO() {
+
+    }
+
     public List<Cinema> getAllCinemas() throws SQLException {
         List<Cinema> cinemas = new ArrayList<>();
         String sql = "SELECT * FROM Cinema";
@@ -161,6 +171,25 @@ public class CinemaDAO extends DBContext {
         }
 
         return theater;
+    }
+
+    public List<Cinema> getCinemasByMovieId(int movieId) {
+        List<Cinema> cinemas = new ArrayList<>();
+        String sql = "SELECT DISTINCT c.CinemaID, c.Name FROM Cinema c "
+                + "JOIN Room r ON c.CinemaID = r.CinemaID "
+                + "JOIN Showtime s ON r.RoomID = s.RoomID "
+                + "WHERE s.MovieID = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, movieId);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    cinemas.add(new Cinema(rs.getInt("CinemaID"), rs.getString("Name")));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cinemas;
     }
 
 }
