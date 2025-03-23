@@ -148,6 +148,7 @@
             <div class="movie-poster">
                 <div class="movie-title"><%= movie.getTitle() %></div>
                 <img src="image/<%= movie.getPoster() %>" alt="<%= movie.getTitle() %>">
+
             </div>
 
 
@@ -159,7 +160,9 @@
                     %>
                     <span class="screening-time">
                         Giờ Chiếu : <%= showtime.getStartTime().format(formatter) %>
+
                     </span>
+
                     <%
                             }
                         

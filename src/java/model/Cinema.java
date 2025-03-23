@@ -33,6 +33,11 @@ public class Cinema {
         this.Address = Address;
     }
 
+    public Cinema(int CinemaID, String Name) {
+        this.CinemaID = CinemaID;
+        this.Name = Name;
+    }
+
     public int getCinemaID() {
         return CinemaID;
     }
@@ -56,8 +61,6 @@ public class Cinema {
     public void setLocation(String Location) {
         this.Location = Location;
     }
-
-
 
     public Timestamp getCreatedAt() {
         return CreatedAt;
@@ -95,7 +98,5 @@ public class Cinema {
     public String toString() {
         return "Cinema{" + "CinemaID=" + CinemaID + ", Name=" + Name + ", Location=" + Location + ", CreatedAt=" + CreatedAt + ", UpdatedAt=" + UpdatedAt + ", ImageURL=" + ImageURL + ", Address=" + Address + '}';
     }
-
-    
 
 }

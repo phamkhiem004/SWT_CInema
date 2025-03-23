@@ -19,6 +19,16 @@ import model.ShowTime;
 
 public class MovieDAO extends DBContext {
 
+    private Connection conn;
+
+    public MovieDAO(Connection conn) {
+        this.conn = conn;
+    }
+
+    public MovieDAO() {
+
+    }
+
     public List<Movie> getAllMovies() throws SQLException {
         List<Movie> movies = new ArrayList<>();
         String sql = "SELECT * FROM Movie";
@@ -212,7 +222,7 @@ public class MovieDAO extends DBContext {
 
     public List<ShowTime> getListShowTime(int MovieID, int CinemaID) throws SQLException {
         List<ShowTime> screening = new ArrayList<>();
-        String sql = "Select StartTime from ShowTime join Room ON ShowTime.RoomID = Room.RoomID where MovieID = ? and CinemaID = ?";
+        String sql = "Select ShowtimeID, StartTime from ShowTime join Room ON ShowTime.RoomID = Room.RoomID where MovieID = ? and CinemaID = ?";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, MovieID);
@@ -221,6 +231,7 @@ public class MovieDAO extends DBContext {
 
                 while (rs.next()) {
                     ShowTime movie = new ShowTime();
+                    movie.setShowTimeID(rs.getInt("ShowtimeID"));
                     movie.setStartTime(rs.getTimestamp("StartTime").toLocalDateTime());
                     screening.add(movie);
                 }

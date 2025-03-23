@@ -6,6 +6,7 @@ package model;
 
 import java.time.LocalDateTime;
 import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  *
@@ -14,13 +15,59 @@ import java.sql.Timestamp;
 public class ShowTime {
 
     private int ShowTimeID;
-    private int CinemaID;
+    private int CinemaID;  
     private int MovieID;
     private LocalDateTime StartTime;
+    
+    int showtime_id;
+    int movie_id;
+    int room_id;
+    Date showtime;
+    
 
     public ShowTime() {
     }
 
+    public ShowTime(int showtime_id, int movie_id, int room_id, Date showtime) {
+        this.showtime_id = showtime_id;
+        this.movie_id = movie_id;
+        this.room_id = room_id;
+        this.showtime = showtime;
+    }
+
+    public int getShowtime_id() {
+        return showtime_id;
+    }
+
+    public void setShowtime_id(int showtime_id) {
+        this.showtime_id = showtime_id;
+    }
+
+    public int getMovie_id() {
+        return movie_id;
+    }
+
+    public void setMovie_id(int movie_id) {
+        this.movie_id = movie_id;
+    }
+
+    public int getRoom_id() {
+        return room_id;
+    }
+
+    public void setRoom_id(int room_id) {
+        this.room_id = room_id;
+    }
+
+    public Date getShowtime() {
+        return showtime;
+    }
+
+    public void setShowtime(Date showtime) {
+        this.showtime = showtime;
+    }
+
+    
     public ShowTime(int MovieID, LocalDateTime StartTime) {
         this.MovieID = MovieID;
         this.StartTime = StartTime;

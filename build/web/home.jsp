@@ -220,7 +220,7 @@
                         <h3><%= movie.getTitle() %></h3>
                         <p>Thời lượng: <%= movie.getDuration() %> phút</p>
                         <a href="movie?id=<%= movie.getMovieID() %>" class="btn">Thông tin</a>
-                        <a href="booking.jsp?id=<%= movie.getMovieID() %>" class="btn">Đặt Vé</a>
+                        <a href="showtime?id=<%= movie.getMovieID() %>" class="btn">Đặt Vé</a>
                     </div>
                     <%
                             count++;

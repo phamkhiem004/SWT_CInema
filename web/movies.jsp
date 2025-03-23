@@ -140,7 +140,7 @@
                 <div class="overlay">
                     <div class="btn-container">
                         <a href="movie?id=<%= movie.getMovieID() %>" class="btn">Thông tin</a>
-                        <a href="booking.jsp?id=<%= movie.getMovieID() %>" class="btn">Đặt vé</a>
+                        <a href="showtime?id=<%= movie.getMovieID() %>" class="btn">Đặt vé</a>
                     </div>
 
                 </div>
