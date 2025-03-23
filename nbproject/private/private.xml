@@ -3,19 +3,26 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/src/java/model/Movie.java</file>
-            <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/src/java/controller/TheaterInfoServlet.java</file>
-            <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/src/java/model/ShowTime.java</file>
-            <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/web/theaterinfo.jsp</file>
-            <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/web/addmovies.jsp</file>
+            <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/web/slider.jsp</file>
+            <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/src/java/controller/UpdateDiscountServlet.java</file>
+            <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/web/updateCombo.jsp</file>
+            <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/src/java/dal/DiscountDAO.java</file>
+            <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/src/java/controller/UpdateMovieServlet.java</file>
             <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/web/movies.jsp</file>
-            <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/web/admindashboard.jsp</file>
-            <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/src/java/controller/ChangePassWordController.java</file>
+            <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/src/java/controller/UpdateComboServlet.java</file>
+            <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/web/css/stylesheet.css</file>
+            <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/web/updateDiscount.jsp</file>
+            <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/web/css/style.css</file>
+            <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/web/Account.jsp</file>
+            <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/src/java/dal/CinemaDAO.java</file>
+            <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/web/home.jsp</file>
+            <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/src/java/model/Combo.java</file>
+            <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/web/comboInfo.jsp</file>
             <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/src/java/dal/MovieDAO.java</file>
-            <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/src/java/dal/ShowtimeDAO.java</file>
-            <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/web/booking.jsp</file>
-            <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/src/java/controller/BookingServlet.java</file>
-            <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/web/discountinfo.jsp</file>
+            <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/src/java/model/Discount.java</file>
+            <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/src/java/controller/StatusDiscountServlet.java</file>
+            <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/src/java/dal/ComboDAO.java</file>
         </group>
     </open-files>
 </project-private>

@@ -6,61 +6,42 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f8f8;
-        }
-        .slider {
-            width: 100%;
-            overflow: hidden;
-            position: relative;
-            border-radius: 10px;
-        }
-        .slider-container {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-        }
-        .slider img {
-            width: 100%;
-            height: auto;
-            flex-shrink: 0;
-        }
-        .slider-button {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            z-index: 10;
-        }
-        .slider-button.prev {
-            left: 10px;
-        }
-        .slider-button.next {
-            right: 10px;
-        }
-    </style>
+<html lang="vi">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Slider JSP</title>
+        <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+
     </head>
     <body>
-        <section class="slider">
-            <div class="slider-container">
-                <img src="image/banner1.jpg" alt="Banner 1">
-                <img src="image/banner2.png" alt="Banner 2">
-                <img src="image/banner3.jpg" alt="Banner 3">
+        <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+            <!-- Danh sách ảnh -->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="image/banner1.jpg" class="d-block w-100" alt="Slide 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="image/banner2.png" class="d-block w-100" alt="Slide 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="image/banner3.jpg" class="d-block w-100" alt="Slide 3">
+                </div>
             </div>
-            <button class="slider-button prev">&#10094;</button>
-            <button class="slider-button next">&#10095;</button>
-        </section>
-        
+
+            <!-- Nút điều hướng -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </button>
+        </div>
+
+        <!-- Nhúng Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     </body>
 </html>
+
