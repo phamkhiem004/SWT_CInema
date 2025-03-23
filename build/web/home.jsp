@@ -60,7 +60,7 @@
             .cinema-info h2 {
                 color: #d32f2f;
             }
-            .btn {
+            .btn1 {
                 display: inline-block;
                 background-color: #d32f2f;
                 color: white;
@@ -71,7 +71,7 @@
                 border-radius: 5px;
                 text-decoration: none;
             }
-            .btn:hover {
+            .btn1:hover {
                 background-color: #b71c1c;
             }
             .slider img {
@@ -181,7 +181,7 @@
             <div class="cinema-info">
                 <h2>Chào mừng, <%= account.getFullname() %> đến với CBD Cinema!</h2>
                 <p>Trải nghiệm những bộ phim mới nhất với chất lượng âm thanh và hình ảnh tuyệt đỉnh.</p>
-                <a href="movies.jsp" class="btn">Xem Phim Ngay</a>
+                <a href="movies.jsp" class="btn1">Xem Phim Ngay</a>
             </div>
 
         <% } else { %>
@@ -189,7 +189,7 @@
             <div class="cinema-info">
                 <h2>Chào mừng đến với CBD Cinema!</h2>
                 <p>Trải nghiệm những bộ phim mới nhất với chất lượng âm thanh và hình ảnh tuyệt đỉnh.</p>
-                <a href="movies.jsp" class="btn">Xem Phim Ngay</a>
+                <a href="movies.jsp" class="btn1">Xem Phim Ngay</a>
             </div>
 
 
@@ -219,8 +219,8 @@
                         <img src="image/<%= movie.getPoster() %>" alt="<%= movie.getTitle() %>">
                         <h3><%= movie.getTitle() %></h3>
                         <p>Thời lượng: <%= movie.getDuration() %> phút</p>
-                        <a href="movie?id=<%= movie.getMovieID() %>" class="btn">Thông tin</a>
-                        <a href="showtime?id=<%= movie.getMovieID() %>" class="btn">Đặt Vé</a>
+                        <a href="movie?id=<%= movie.getMovieID() %>" class="btn1">Thông tin</a>
+                        <a href="showtime?id=<%= movie.getMovieID() %>" class="btn1">Đặt Vé</a>
                     </div>
                     <%
                             count++;

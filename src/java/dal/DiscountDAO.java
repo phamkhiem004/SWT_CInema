@@ -100,6 +100,26 @@ public class DiscountDAO extends DBContext {
         }
     }
 
+    public void updateDiscount(Discount discount) {
+        String sql = "UPDATE Discount SET DiscountName = ?, DiscountCode = ?, DiscountPercentage = ?, ExpiryDate = ?,CreatedAt = ? , UpdatedAt = ?, ImageURL = ?, Description = ?, Status = 'Active' WHERE DiscountID = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, discount.getDiscountName());
+            stmt.setString(2, discount.getDiscountCode());
+            stmt.setFloat(3, discount.getDiscountPercentage());
+            stmt.setDate(4, new java.sql.Date(discount.getExpiryDate().getTime()));
+            stmt.setTimestamp(5, discount.getCreatedAt());
+            stmt.setTimestamp(6, discount.getUpdatedAt()); // Cập nhật thời gian sửa đổi
+            stmt.setString(7, discount.getImageURL());
+            stmt.setString(8, discount.getDescription());
+            stmt.setInt(9, discount.getDiscountID()); // Điều kiện WHERE
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     // Phương thức chuyển đổi trạng thái Active/Inactive
     public boolean toggleDiscountStatus(int discountID) {
         String sql = "UPDATE Discount SET Status = CASE WHEN Status = 'Active' THEN 'Inactive' ELSE 'Active' END WHERE DiscountID = ?";

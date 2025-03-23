@@ -104,6 +104,7 @@
             Account account = (Account) session.getAttribute("account");
         %>
         <% if (account != null && ("Admin".equals(account.getRole()) || "Staff".equals(account.getRole()))) { %>
+        <a href="updateDiscount.jsp?id=<%= discount.getDiscountID() %>" class="btn" style="background-color: green;">Cập nhật thông tin</a>
         <a href="StatusDiscountServlet?id=<%= discount.getDiscountID() %>" 
            class="btn"
            style="background-color: <%= discount.getStatus().equals("Active") ? "red" : "green" %>;"

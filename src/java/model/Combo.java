@@ -31,6 +31,16 @@ public class Combo {
         this.poster_url = poster_url;
     }
 
+    public Combo(int combo_id, double price, String combo_name, String description, String poster_url, int quantity) {
+        this.combo_id = combo_id;
+        this.price = price;
+        this.combo_name = combo_name;
+        this.description = description;
+        this.poster_url = poster_url;
+        this.quantity = quantity;
+    }
+    
+
     public int getCombo_id() {
         return combo_id;
     }

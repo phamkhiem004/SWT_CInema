@@ -103,6 +103,7 @@
             Account account = (Account) session.getAttribute("account");
         %>
         <% if (account != null && ("Admin".equals(account.getRole()) || "Staff".equals(account.getRole()))) { %>
+        <a href="updateCombo.jsp?id=<%= combo.getCombo_id() %>" class="btn" style="background-color: green;">Cập nhật thông tin</a>
         <a href="StatusComboServlet?id=<%= combo.getCombo_id() %>" 
            class="btn"
            style="background-color: <%= combo.getStatus().equals("Active") ? "red" : "green" %>;"
