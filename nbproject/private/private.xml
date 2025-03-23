@@ -6,6 +6,7 @@
             <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/web/slider.jsp</file>
             <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/src/java/controller/UpdateDiscountServlet.java</file>
             <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/web/updateCombo.jsp</file>
+            <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/web/register.jsp</file>
             <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/src/java/dal/DiscountDAO.java</file>
             <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/src/java/controller/UpdateMovieServlet.java</file>
             <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/web/movies.jsp</file>
@@ -13,12 +14,14 @@
             <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/web/css/stylesheet.css</file>
             <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/web/updateDiscount.jsp</file>
             <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/web/css/style.css</file>
+            <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/web/moviesinfo.jsp</file>
             <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/web/Account.jsp</file>
             <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/src/java/dal/CinemaDAO.java</file>
             <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/web/home.jsp</file>
             <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/src/java/model/Combo.java</file>
             <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/web/comboInfo.jsp</file>
             <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/src/java/dal/MovieDAO.java</file>
+            <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/web/logoutbutton.jsp</file>
             <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/web/discountinfo.jsp</file>
             <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/src/java/model/Discount.java</file>
             <file>file:/C:/Users/Acer%20Predator/Documents/NetBeansProjects/SWT_CInema/src/java/controller/StatusDiscountServlet.java</file>
