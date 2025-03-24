@@ -12,6 +12,14 @@
         <servlet-name>BookingServlet</servlet-name>
         <servlet-class>controller.BookingServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ChooseComboServlet</servlet-name>
+        <servlet-class>controller.ChooseComboServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CompletePaymentServlet</servlet-name>
+        <servlet-class>controller.CompletePaymentServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AccountServlet</servlet-name>
         <url-pattern>/account</url-pattern>
@@ -23,5 +31,13 @@
     <servlet-mapping>
         <servlet-name>BookingServlet</servlet-name>
         <url-pattern>/booking</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChooseComboServlet</servlet-name>
+        <url-pattern>/choose-combo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CompletePaymentServlet</servlet-name>
+        <url-pattern>/completePayment</url-pattern>
     </servlet-mapping>
 </web-app>

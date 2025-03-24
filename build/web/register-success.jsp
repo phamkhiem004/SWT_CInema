@@ -18,7 +18,7 @@
                     </div>
                     <div class="card-body text-center">
                         <p>Cảm ơn bạn đã đăng ký tài khoản.</p>
-                        <a href="home.jsp" class="btn btn-primary">Xem phim ngay</a> <%-- Liên kết đến trang chủ --%>
+                        <a href="login.jsp" class="btn btn-primary">Đăng Nhập Ngay</a> <%-- Liên kết đến trang chủ --%>
                     </div>
                 </div>
             </div>

@@ -23,12 +23,12 @@
                         <div class="row d-flex justify-content-center">
                             <div class="col-12 col-lg-5 pe-0">
                                 <div class="form-outline" data-mdb-input-init>
-                                    <input type="text" id="OTP" name="OTP" class="form-control" required=""/>
+                                    <input type="text" id="OTP" name="OTP" placeholder="Nhập Mã OTP" class="form-control" required=""/>
                                 </div>
                                 <p class="m-0 ps-2 text-danger">${message}</p>
                             </div>
                             <div class="col-12 col-lg-3">
-                                <button type="submit" class="btn btn-danger" data-mdb-ripple-init>Xác nhận</button>
+                                <button type="submit" class="button btn-danger" data-mdb-ripple-init>Xác nhận</button>
                             </div>
                         </div>
                     </div>

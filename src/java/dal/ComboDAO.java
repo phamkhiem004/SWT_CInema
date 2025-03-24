@@ -4,6 +4,7 @@
  */
 package dal;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import model.Combo;
@@ -38,7 +39,23 @@ public class ComboDAO extends DBContext {
         }
         return combos;
     }
-
+     public List<Combo> getAllCombos() {
+        List<Combo> combos = new ArrayList<>();
+        String sql = "SELECT * FROM Combo";
+        try (PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                combos.add(new Combo(
+                    rs.getInt("ComboID"),
+                    rs.getString("ComboName"),
+                    rs.getBigDecimal("Cost")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return combos;
+    }
     public Combo getComboByID(int comboID) {
         String sql = "SELECT * FROM Combo WHERE ComboID = ? AND Status = 'Active'";
         Combo combo = null;
@@ -65,7 +82,19 @@ public class ComboDAO extends DBContext {
 
         return combo;
     }
-
+    public BigDecimal getComboPrice(int comboID) {
+        String sql = "SELECT Cost FROM Combo WHERE ComboID = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, comboID);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getBigDecimal("Cost");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return BigDecimal.ZERO;
+    }
     public void createCombo(Combo combo) {
         String sql = "INSERT INTO Combo (ComboName, Poster, Description, Status, Cost, Quantity) "
                 + "VALUES (?, ?, ?, 'Active', ?, ?)";
