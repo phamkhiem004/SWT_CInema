@@ -19,7 +19,7 @@ public class BillingSeatDAO extends DBContext {
     public List<String> getBookedSeats(int showtimeID) {
         List<String> bookedSeats = new ArrayList<>();
         String sql = "SELECT SeatName FROM Billing_Seat WHERE BillingID IN "
-                + "(SELECT BillingID FROM Billing WHERE ShowtimeID = ?)";
+                + "(SELECT BillingID FROM Billing WHERE ShowtimeID = ? and PaymentStatus like 'Completed')";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, showtimeID);
             ResultSet rs = stmt.executeQuery();
@@ -30,6 +30,23 @@ public class BillingSeatDAO extends DBContext {
             e.printStackTrace();
         }
         return bookedSeats;
+    }
+    public List<String> getBookedSeatsByUser(int showtimeID, int accountID) {
+        List<String> myBookedSeats = new ArrayList<>();
+        String sql = "SELECT bs.SeatName FROM Billing_Seat bs " +
+                     "JOIN Billing b ON bs.BillingID = b.BillingID " +
+                     "WHERE b.ShowtimeID = ? AND b.UserID = ? and b.PaymentStatus like 'Completed'";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, showtimeID);
+            stmt.setInt(2, accountID);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                myBookedSeats.add(rs.getString("SeatName"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return myBookedSeats;
     }
 
 }

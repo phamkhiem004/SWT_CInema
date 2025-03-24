@@ -64,8 +64,8 @@
 
                 <% if (account != null) { %>
                 <%-- Hiển thị nút Đăng xuất --%>
-                <span style="color: #fff;"><%= account.getFullname() %></span> 
-                <a href="logout" class="btn">Đăng xuất</a>
+                <a href="UserProfile.jsp" class="button"><%= account.getFullname() %></a> 
+                <a href="logout" class="button">Đăng xuất</a>
                 <% } else { %>
                 <!-- Nếu người dùng chưa đăng nhập, hiển thị nút Đăng nhập và Đăng ký -->
                 <a href="login.jsp">Đăng nhập</a> | 

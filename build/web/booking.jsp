@@ -10,7 +10,7 @@
 
 <%
     List<String> bookedSeats = (List<String>) request.getAttribute("bookedSeats");
-    List<String> myBookedSeats = (List<String>) request.getAttribute("myBookedSeats");
+
     int showtimeID = (Integer) request.getAttribute("showtimeID");
 %>
 
@@ -141,8 +141,16 @@
                         </div>
                     </c:forEach>
                 </div>
+                <c:if test="${isExistPending == false}">
+                    <button type="submit" class="btn btn-primary mt-3">Đặt Vé</button>
+                </c:if>
+                <c:if test="${isExistPending == true}">
+                    <div style="padding: 15px; background-color: #ffcccc; border-left: 5px solid #ff4444; color: #cc0000; font-weight: bold; margin: 10px 0; border-radius: 5px;">
+                        ⚠️ Bạn không thể đặt thêm ghế vì bạn đã có một đơn hàng chưa hoàn tất. <br> 
+                        Vui lòng hoàn tất hoặc hủy đơn trước khi đặt ghế mới.
+                    </div>
+                </c:if>   
 
-                <button type="submit" class="btn btn-primary mt-3">Đặt Vé</button>
             </form>
         </div>
 

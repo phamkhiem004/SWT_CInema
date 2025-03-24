@@ -39,7 +39,15 @@ public class Discount {
         this.ImageURL = ImageURL;
         this.Description = Description;
     }
-
+        
+    public Discount(int DiscountID, String DiscountName, String DiscountCode, float DiscountPercentage, Date ExpiryDate) {
+        this.DiscountID = DiscountID;
+        this.DiscountName = DiscountName;
+        this.DiscountCode = DiscountCode;
+        this.DiscountPercentage = DiscountPercentage;
+        this.ExpiryDate = ExpiryDate;
+    }
+    
     public String getStatus() {
         return Status;
     }

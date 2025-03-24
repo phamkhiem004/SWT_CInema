@@ -34,7 +34,7 @@ public class VerifyOTPController extends HttpServlet {
             // Nếu OTP chính xác, chuyển hướng đến trang thay đổi mật khẩu
             Account account = (Account) req.getSession().getAttribute("userForgetPassword");
             req.setAttribute("account", account);
-            req.getRequestDispatcher("change-password.jsp").forward(req, resp);
+            req.getRequestDispatcher("reset-password.jsp").forward(req, resp);
         } else {
             // Nếu OTP sai, hiển thị thông báo lỗi
             req.setAttribute("message", "Mã OTP không chính xác. Vui lòng thử lại.");

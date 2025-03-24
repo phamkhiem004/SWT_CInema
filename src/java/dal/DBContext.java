@@ -18,16 +18,20 @@ public class DBContext {
     public Connection connection;
 
     public DBContext() {
+        
         try {
-            String user = "sa";
-            String pass = "sa";
+            String user = "ad";
+            String pass = "12345";
             String url = "jdbc:sqlserver://localhost:1433;databaseName=MovieTicketBooking";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connection = DriverManager.getConnection(url, user, pass);
         } catch (Exception ex) {
             Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
-
+    public Connection getConnection() {
+        return connection;
+    }
   
 }

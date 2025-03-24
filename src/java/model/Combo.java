@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author DUNGVT
@@ -17,10 +19,19 @@ public class Combo {
     String status;
     String poster_url;
     int quantity;
-
+     private int comboID;
+    private String comboName;
+    private String poster;
+    private String descriptionD;
+    private String statusD;
+    private BigDecimal cost;
     public Combo() {
     }
-
+        public Combo(int comboID, String comboName, BigDecimal cost) {
+        this.comboID = comboID;
+        this.comboName = comboName;
+        this.cost = cost;
+    }
     public Combo(int combo_id, double price, String combo_name, String description, String status, int quantity, String poster_url) {
         this.combo_id = combo_id;
         this.price = price;
@@ -95,6 +106,54 @@ public class Combo {
 
     public void setPoster_url(String poster_url) {
         this.poster_url = poster_url;
+    }
+
+    public int getComboID() {
+        return comboID;
+    }
+
+    public void setComboID(int comboID) {
+        this.comboID = comboID;
+    }
+
+    public String getComboName() {
+        return comboName;
+    }
+
+    public void setComboName(String comboName) {
+        this.comboName = comboName;
+    }
+
+    public String getPoster() {
+        return poster;
+    }
+
+    public void setPoster(String poster) {
+        this.poster = poster;
+    }
+
+    public String getDescriptionD() {
+        return descriptionD;
+    }
+
+    public void setDescriptionD(String descriptionD) {
+        this.descriptionD = descriptionD;
+    }
+
+    public String getStatusD() {
+        return statusD;
+    }
+
+    public void setStatusD(String statusD) {
+        this.statusD = statusD;
+    }
+
+    public BigDecimal getCost() {
+        return cost;
+    }
+
+    public void setCost(BigDecimal cost) {
+        this.cost = cost;
     }
 
     @Override

@@ -51,6 +51,26 @@ public class DiscountDAO extends DBContext {
         return discounts;
     }
 
+    public Discount getDiscountByCode(String discountCode) {
+        String sql = "SELECT * FROM Discount WHERE DiscountCode = ? AND Status = 'Active' AND ExpiryDate > GETDATE()";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, discountCode);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new Discount(
+                        rs.getInt("DiscountID"),
+                        rs.getString("DiscountName"),
+                        rs.getString("DiscountCode"),
+                        rs.getFloat("DiscountPercentage"),
+                        rs.getDate("ExpiryDate")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public Discount getDiscountByID(int discountID) {
         String sql = "SELECT * FROM Discount WHERE DiscountID = ? AND Status = 'Active'";
         Discount discount = null;
@@ -149,7 +169,17 @@ public class DiscountDAO extends DBContext {
         }
         return sb.toString();
     }
-
+    public void applyDiscount(String billingID, int discountID, float discountPercentage) {
+        String sql = "UPDATE Billing SET DiscountID = ?, TotalAmount = TotalAmount * (1 - ? / 100) WHERE BillingID = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, discountID);
+            ps.setFloat(2, discountPercentage);
+            ps.setString(3, billingID);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     // Kiểm tra xem mã giảm giá đã tồn tại trong DB chưa
     private boolean isDiscountCodeExists(String code) {
         String sql = "SELECT COUNT(*) FROM Discount WHERE DiscountCode = ?";
