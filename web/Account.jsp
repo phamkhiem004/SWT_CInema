@@ -4,7 +4,6 @@
     Author     : Acer Predator
 --%>
 
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -13,108 +12,99 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Account</title>
         <link rel="stylesheet" href="css/admin.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
         <script>
             function sortTable(columnIndex) {
                 let table = document.querySelector(".customer-table tbody");
                 let rows = Array.from(table.rows);
-                let ascending = table.getAttribute("data-sort") !== "asc"; // Toggle sort order
+                let ascending = table.getAttribute("data-sort") !== "asc";
 
                 rows.sort((rowA, rowB) => {
                     let cellA = rowA.cells[columnIndex].innerText.trim().toLowerCase();
                     let cellB = rowB.cells[columnIndex].innerText.trim().toLowerCase();
-
-                    if (cellA < cellB)
-                        return ascending ? -1 : 1;
-                    if (cellA > cellB)
-                        return ascending ? 1 : -1;
-                    return 0;
+                    return ascending ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
                 });
 
                 table.innerHTML = "";
                 rows.forEach(row => table.appendChild(row));
-
-                // Update sort order
                 table.setAttribute("data-sort", ascending ? "asc" : "desc");
 
-                // Update triangle icon direction
                 let header = document.querySelectorAll(".sortable span.sort-icon")[columnIndex - 3];
                 header.innerHTML = ascending ? "▲" : "▼";
             }
 
+            function confirmBlock(link) {
+                event.preventDefault();
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "Do you want to block this account?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#d33",
+                    cancelButtonColor: "#3085d6",
+                    confirmButtonText: "Yes, block it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = link.href;
+                    }
+                });
+            }
 
+            function confirmUnblock(link) {
+                event.preventDefault();
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "Do you want to unblock this account?",
+                    icon: "info",
+                    showCancelButton: true,
+                    confirmButtonColor: "#28a745",
+                    cancelButtonColor: "#3085d6",
+                    confirmButtonText: "Yes, unblock it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = link.href;
+                    }
+                });
+            }
         </script>
+        <style>
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            th, td {
+                padding: 8px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
+            .status-active {
+                color: green;
+                font-weight: bold;
+            }
+            .status-blocked {
+                color: red;
+                font-weight: bold;
+            }
+        </style>
     </head>
     <body>
-    <body>
         <div class="container">
-            <aside>
-                <div class="top">
-                    <div class="logo">
-                        <h2>C<span class="danger">ABC</h2>
-                    </div>
-                    <div class="close">
-                        <span class="material-symbols-outlined"> close </span>
-                    </div>
-                </div>
-
-                <div class="sidebar">
-                    <a href="admindashboard.jsp">
-                        <span class="material-symbols-outlined"> grid_view </span>
-                        <h3>Dashboard</h3>
-                    </a>
-
-                    <a href="Account.jsp" class="active">
-                        <span class="material-symbols-outlined"> person </span>
-                        <h3>Account</h3>
-                    </a>
-
-                    <a href="#">
-                        <span class="material-symbols-outlined"> movie </span>
-                        <h3>Movie</h3>
-                    </a>
-
-                    <a href="#">
-                        <span class="material-symbols-outlined"> other_houses </span>
-                        <h3>Theater</h3>
-                    </a>
-
-                    <a href="#">
-                        <span class="material-symbols-outlined"> meeting_room </span>
-                        <h3>Screening room</h3>
-                    </a>
-
-                    <a href="combo">
-                        <span class="material-symbols-outlined"> attach_money </span>
-                        <h3>Combo</h3>
-                    </a>
-
-                    <a href="#">
-                        <span class="material-symbols-outlined"> app_promo </span>
-                        <h3>Promotion</h3>
-                    </a>
-
-                    <a href="#">
-                        <span class="material-symbols-outlined"> query_stats </span>
-                        <h3>Revenue</h3>
-                    </a>
-
-                    <a href="#">
-                        <span class="material-symbols-outlined"> logout </span>
-                        <h3>Log out</h3>
-                    </a>
-                </div>
-            </aside>
+            <jsp:include page="sidebar.jsp" />
             <main>
                 <div class="top-bar">
                     <h1>Account List</h1>
                     <div class="search-container">
-                        <form action="seachaccount" method="POST">
-                            <input type="text" id="searchInput" placeholder="Search customers..." />
+                        <form action="accounts" method="GET">
+                            <input type="text" id="searchInput" placeholder="Search customers..." name="search"/>
                             <button class="btn-search" type="submit">Search</button>
                         </form>
                     </div>
                 </div>
+
+                <a href="addAccount" class="btn btn-success" style="margin-bottom: 1em">Add account</a>
 
                 <table class="customer-table">
                     <thead>
@@ -148,11 +138,26 @@
                                 </td>
                                 <td>${a.address}</td>
                                 <td>${a.phoneNumber}</td>
-                                <td class="${a.status == 'Active' ? 'status-active' : 'status-suspended'}">${a.status}</td>
+                                <td class="${a.status == 'Active' ? 'status-active' : 'status-blocked'}">${a.status}</td>
                                 <td>
-                                    <a href="account?action=update&id=${a.id}" class="btn btn-success">Edit</a>
-                                    <a onclick="deleteWarning(${a.id}, '${a.fullname}')" class="btn btn-danger">Delete</a>
+                                    <a href="accounts?action=update&id=${a.id}" class="btn btn-success btn-sm">Edit</a>
+                                    <form action="blockUser" method="post" style="display:inline;">
+                                        <input type="hidden" name="id" value="${a.id}">
+                                        <c:choose>
+                                            <c:when test="${a.status == 'Active'}">
+                                                <!-- Nút BLOCK -->
+                                                <input type="hidden" name="action" value="block">
+                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to block this user?')">Block</button>
+                                            </c:when>
+                                            <c:when test="${a.status == 'Suspend'}">
+                                                <!-- Nút UNBLOCK -->
+                                                <input type="hidden" name="action" value="unblock">
+                                                <button type="submit" class="btn btn-success btn-sm" onclick="return confirm('Are you sure you want to unblock this user?')">Unblock</button>
+                                            </c:when>
+                                        </c:choose>
+                                    </form>
                                 </td>
+
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -161,4 +166,3 @@
         </div>
     </body>
 </html>
-

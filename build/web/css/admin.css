@@ -508,6 +508,72 @@ main .insights .progress .number{
 .btn-danger:hover {
     background: #c53030;
 }
+/* Đảm bảo bảng có border và đường viền */
+.billing-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+}
+
+/* Cách đều các dòng trong bảng */
+.billing-table th, .billing-table td {
+    padding: 12px;  /* Điều chỉnh khoảng cách trong các ô bảng */
+    text-align: left; /* Căn chỉnh nội dung bên trái */
+    border: 1px solid #ddd; /* Đường viền giữa các ô bảng */
+}
+
+/* Cải thiện giao diện của các cột đầu tiên */
+.billing-table th {
+    background-color: #f2f2f2; /* Màu nền cho tiêu đề */
+    font-weight: bold; /* Làm đậm tiêu đề */
+}
+
+/* Các nút hành động (Edit, Delete) */
+.billing-table .btn {
+    padding: 5px 10px;
+    text-align: center;
+    display: inline-block;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+/* Đảm bảo các nút Edit và Delete có màu sắc phù hợp */
+.billing-table .btn-success {
+    background-color: #4CAF50; /* Màu xanh lá */
+    color: white;
+    border: none;
+}
+
+.billing-table .btn-danger {
+    background-color: #f44336; /* Màu đỏ */
+    color: white;
+    border: none;
+}
+
+/* Hover effect cho các nút */
+.billing-table .btn:hover {
+    opacity: 0.8;
+}
+
+/* Thêm màu cho cột trạng thái (Active, Suspended) */
+.status-active {
+    color: green;
+}
+
+.status-suspended {
+    color: red;
+}
+
+/* Thêm khoảng cách giữa các dòng */
+.billing-table tbody tr {
+    height: 50px; /* Điều chỉnh chiều cao của mỗi dòng */
+}
+
+/* Đảm bảo có khoảng cách giữa các ô khi sử dụng kiểu thẻ tr */
+.billing-table tbody tr:nth-child(odd) {
+    background-color: #f9f9f9; /* Nền xen kẽ giữa các dòng */
+}
+
 /*------------------------------------------*/
 
 .right{

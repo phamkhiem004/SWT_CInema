@@ -31,7 +31,29 @@ public class BillingDAO extends DBContext {
         }
         return null; // Trả về null nếu không tìm thấy
     }
-
+      // Lấy tất cả các hoá đơn
+    public List<Billing> getAllBillings() {
+        List<Billing> billingList = new ArrayList<>();
+        String query = "SELECT * FROM billing"; // Cập nhật tên bảng và trường nếu cần
+        try (Statement stmt = connection.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
+            while (rs.next()) {
+                Billing billing = new Billing(
+                        rs.getString("billingID"),
+                        rs.getInt("userID"),
+                        rs.getInt("showtimeID"),
+                        rs.getBigDecimal("totalAmount"),
+                        rs.getString("paymentMethod"),
+                        rs.getString("paymentStatus"),
+                        rs.getInt("discountID"),
+                        rs.getDate("bookingDate")
+                );
+                billingList.add(billing);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return billingList;
+    }
     public void updatePaymentStatus(String billingID) {
         String sql = "UPDATE Billing SET PaymentStatus = 'Completed' WHERE BillingID = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -41,6 +63,20 @@ public class BillingDAO extends DBContext {
             e.printStackTrace();
         }
     }
+    public boolean updatePaymentStatus(String billingID, String status) {
+    String query = "UPDATE billing SET paymentStatus = ? WHERE billingID = ?";
+    try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(query)) {
+        statement.setString(1, status); // Cập nhật trạng thái
+        statement.setString(2, billingID); // Cập nhật billingID
+
+        int rowsAffected = statement.executeUpdate();
+
+        return rowsAffected > 0; // Trả về true nếu cập nhật thành công
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return false; // Nếu có lỗi, trả về false
+    }
+}
 
     // Lấy thông tin thanh toán
     public Billing getBillingByID(String billingID) {
@@ -83,7 +119,7 @@ public class BillingDAO extends DBContext {
         }
         return seats;
     }
-
+    
     // Lấy danh sách combo theo billing
     public List<BillingCombo> getCombosByBillingID(String billingID) {
         List<BillingCombo> combos = new ArrayList<>();

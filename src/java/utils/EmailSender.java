@@ -10,7 +10,7 @@ import java.util.Properties;
 public class EmailSender {
 
     public static void sendEmail(String to, String subject, String content) {
-        final String username = "CBDCinema@gmail.com";
+        final String username = "fcareinsurance@gmail.com";
         final String password = "cifxowsnfwdnywed";
 
         Properties props = new Properties();
