@@ -14,63 +14,7 @@
     </head>
     <body>
         <div class="container">
-            <aside>
-                <div class="top">
-                    <div class="logo">
-                        <h2>C<span class="danger">ABC</h2>
-                    </div>
-                    <div class="close">
-                        <span class="material-symbols-outlined"> close </span>
-                    </div>
-                </div>
-
-                <div class="sidebar">
-                    <a href="admindashboard.jsp" class="active">
-                        <span class="material-symbols-outlined"> grid_view </span>
-                        <h3>Dashboard</h3>
-                    </a>
-
-                    <a href="account"> 
-                        <span class="material-symbols-outlined"> person </span>
-                        <h3>Account</h3>
-                    </a>
-
-                    <a href="#">
-                        <span class="material-symbols-outlined"> movie </span>
-                        <h3>Movie</h3>
-                    </a>
-
-                    <a href="#">
-                        <span class="material-symbols-outlined"> other_houses </span>
-                        <h3>Theater</h3>
-                    </a>
-
-                    <a href="#">
-                        <span class="material-symbols-outlined"> meeting_room </span>
-                        <h3>Screening room</h3>
-                    </a>
-
-                    <a href="combo">
-                        <span class="material-symbols-outlined"> attach_money </span>
-                        <h3>Combo</h3>
-                    </a>
-
-                    <a href="#">
-                        <span class="material-symbols-outlined"> app_promo </span>
-                        <h3>Promotion</h3>
-                    </a>
-
-                    <a href="#">
-                        <span class="material-symbols-outlined"> query_stats </span>
-                        <h3>Revenue</h3>
-                    </a>
-
-                    <a href="#">
-                        <span class="material-symbols-outlined"> logout </span>
-                        <h3>Log out</h3>
-                    </a>
-                </div>
-            </aside>
+            <jsp:include page="sidebar.jsp" />
 
             <main>
                 <h1>Dashboard</h1>

@@ -73,6 +73,7 @@ public Account(String fullname, String email, String password, String phoneNumbe
     this.gender = gender;
     this.dateOfBirth = dateOfBirth;
 }
+
     // Getters and Setters for all the fields
     public int getId() {
         return id;
