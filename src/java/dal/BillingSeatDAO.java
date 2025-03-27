@@ -34,7 +34,7 @@ public class BillingSeatDAO extends DBContext {
     public List<String> getBookedSeats(int showtimeID) {
         List<String> bookedSeats = new ArrayList<>();
         String sql = "SELECT SeatName FROM Billing_Seat WHERE BillingID IN "
-                + "(SELECT BillingID FROM Billing WHERE ShowtimeID = ? and PaymentStatus like 'Completed')";
+                + "(SELECT BillingID FROM Billing WHERE ShowtimeID = ? and PaymentStatus in ('Completed' , 'Pending'))";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, showtimeID);
             ResultSet rs = stmt.executeQuery();
