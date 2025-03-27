@@ -52,11 +52,16 @@
                 opacity: 0.6;
             } /* Ghế đã đặt */
             .my-booked {
-                background-color: #007bff;
+                background-color:  #28a745;
                 color: white;
                 cursor: not-allowed;
                 opacity: 0.8;
-            } /* Ghế tôi đặt */
+            }
+            .my-choose{
+                background-color:  #007bff;
+                color: white;
+                opacity: 0.8;
+            }/* Ghế tôi đặt */
             .seat input {
                 display: none;
             }
@@ -92,7 +97,8 @@
                 <div class="legend-box vip"></div> <span class="me-3">VIP - 100K</span>
                 <div class="legend-box couple"></div> <span class="me-3">Couple - 150K</span>
                 <div class="legend-box booked"></div> <span class="me-3">Đã đặt</span>
-                <div class="legend-box my-booked"></div> <span>Ghế tôi đặt</span>
+                <div class="legend-box my-booked"></div> <span class="me-3">Ghế tôi đã đặt trước đó </span>
+                <div class="legend-box my-choose"></div> <span>Ghế tôi đang chọn</span>
             </div>
 
             <!-- Màn hình -->
@@ -168,9 +174,9 @@
                     seat.addEventListener("change", function () {
                         let parentLabel = this.parentElement;
                         if (this.checked) {
-                            parentLabel.classList.add("my-booked");
+                            parentLabel.classList.add("my-choose");
                         } else {
-                            parentLabel.classList.remove("my-booked");
+                            parentLabel.classList.remove("my-choose");
                         }
                     });
                 });
@@ -180,7 +186,7 @@
                 seatElements.forEach(seat => {
                     if (selectedSeats.includes(seat.value)) {
                         seat.checked = true;
-                        seat.parentElement.classList.add("my-booked");
+                        seat.parentElement.classList.add("my-choose");
                     }
                 });
             });
