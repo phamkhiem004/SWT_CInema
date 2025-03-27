@@ -62,7 +62,7 @@
                 <h4>Người dùng: ${user.fullname}</h4>
                 <p><strong>Billing ID:</strong> ${billing.billingID}</p>
                 <p><strong>Showtime ID:</strong> ${billing.showtimeID}</p>
-                <p><strong>Tổng tiền sau giảm giá:</strong> <span class="text-danger">${discountedTotal} VND</span></p>
+                <p><strong>Tổng tiền sau giảm giá:</strong> <span class="text-danger">${discountedTotal} VNĐ</span></p>
                 <p><strong>Nội dung chuyển khoản:</strong> <span class="payment-code">${paymentContent}</span></p>
             </div>
 

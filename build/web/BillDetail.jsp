@@ -98,12 +98,21 @@
             <div class="bill-body">
                 <table>
                     <tr><th>Mã Hóa Đơn:</th><td><%= bill.getBillingID() %></td></tr>
-                    <tr><th>Mã Người Dùng:</th><td><%= bill.getUserID() %></td></tr>
-                    <tr><th>Mã Suất Chiếu:</th><td><%= bill.getShowtimeID() %></td></tr>
+                    <tr><th>Tên Suất Chiếu:</th><td><%= bill.getTitle() %></td></tr>
+                    <tr><th>Giờ chiếu:</th><td><%= bill.getStartTime() %></td></tr>
                     <tr><th>Tổng Tiền:</th><td><%= bill.getTotalAmount() %> VNĐ</td></tr>
                     <tr><th>Phương Thức Thanh Toán:</th><td><%= bill.getPaymentMethod() %></td></tr>
                     <tr><th>Trạng Thái Thanh Toán:</th><td><%= bill.getPaymentStatus() %></td></tr>
-                    <tr><th>Mã Giảm Giá:</th><td><%= bill.getDiscountID() != null ? bill.getDiscountID() : "Không áp dụng" %></td></tr>
+                    <tr><th>Giảm Giá:</th><td><%= bill.getDiscountPercentage() %>%</td></tr>
+                    <tr><th>Ghế Đã Đặt:</th>
+                        <td>
+                            <% for (String seat : bill.getSeatNames()) { %>
+                            <span style="padding: 5px; border: 1px solid #ccc; margin: 3px; display: inline-block;">
+                                <%= seat %>
+                            </span>
+                            <% } %>
+                        </td>
+                    </tr>
                 </table>
             </div>
 

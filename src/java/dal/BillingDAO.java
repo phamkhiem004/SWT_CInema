@@ -6,6 +6,7 @@ package dal;
 
 import java.math.BigDecimal;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import model.Billing;
@@ -34,6 +35,48 @@ public class BillingDAO extends DBContext {
                 billing.setBookingDate(rs.getDate("BookingDate"));
                 return billing;
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Billing getBillingDetailById(String billingID) {
+        String query = "SELECT Billing.BillingID, Title, BookingDate, TotalAmount, PaymentMethod, PaymentStatus, DiscountPercentage, StartTime, Discount.DiscountID, SeatName "
+                + "FROM Billing "
+                + "JOIN Showtime ON Billing.ShowtimeID = Showtime.ShowtimeID "
+                + "LEFT JOIN Discount ON Discount.DiscountID = Billing.DiscountID "
+                + "JOIN Movie ON Movie.MovieID = Showtime.MovieID "
+                + "JOIN Billing_Seat ON Billing.BillingID = Billing_Seat.BillingID "
+                + "WHERE Billing.BillingID = ?";
+
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, billingID);
+            ResultSet rs = ps.executeQuery();
+            Billing billing = null;
+            List<String> seatNames = new ArrayList<>();
+
+            while (rs.next()) {
+                if (billing == null) {
+                    billing = new Billing();
+                    billing.setBillingID(rs.getString("BillingID"));
+                    billing.setTitle(rs.getString("Title"));
+                    billing.setBookingDate(rs.getDate("BookingDate"));
+                    billing.setStartTime(rs.getTimestamp("StartTime").toLocalDateTime());
+                    billing.setTotalAmount(rs.getBigDecimal("TotalAmount"));
+                    billing.setPaymentMethod(rs.getString("PaymentMethod"));
+                    billing.setPaymentStatus(rs.getString("PaymentStatus"));
+                    billing.setDiscountPercentage(rs.getDouble("DiscountPercentage"));
+                    billing.setDiscountID(rs.getInt("DiscountID"));
+                }
+                seatNames.add(rs.getString("SeatName"));
+            }
+
+            if (billing != null) {
+                billing.setSeatNames(seatNames);  // Lưu danh sách ghế vào Billing
+            }
+
+            return billing;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -132,20 +175,20 @@ public class BillingDAO extends DBContext {
     // Lấy thông tin thanh toán
     public List<Billing> getBillingByUserID(int userID) {
         List<Billing> billingList = new ArrayList<>();
-        String sql = "SELECT * FROM Billing WHERE userID = ?";
+        String sql = "Select BillingID, Title, BookingDate, TotalAmount, PaymentMethod, PaymentStatus from Billing \n"
+                + "Join Showtime On Billing.ShowtimeID = Showtime.ShowtimeID\n"
+                + "Join Movie On Movie.MovieID = Showtime.MovieID where UserID = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, userID);
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     billingList.add(new Billing(
                             rs.getString("BillingID"),
-                            rs.getInt("UserID"),
-                            rs.getInt("ShowtimeID"),
                             rs.getBigDecimal("TotalAmount"),
                             rs.getString("PaymentMethod"),
                             rs.getString("PaymentStatus"),
-                            rs.getInt("DiscountID"),
-                            rs.getDate("BookingDate")
+                            rs.getDate("BookingDate"),
+                            rs.getString("Title")
                     ));
                 }
             }
@@ -193,7 +236,8 @@ public class BillingDAO extends DBContext {
         }
         return combos;
     }
-    public void updateQuantity(int comboID,int Quantity) {
+
+    public void updateQuantity(int comboID, int Quantity) {
         String sql = "Update Combo set Quantity = (Quantity - ?) where ComboID = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, Quantity);
@@ -434,7 +478,7 @@ public class BillingDAO extends DBContext {
 
     public boolean deleteBillingById(String billingID) {
         String query = "DELETE FROM Billing WHERE billingID = ?";
-        try ( PreparedStatement ps = connection.prepareStatement(query)) {
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, billingID);
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
