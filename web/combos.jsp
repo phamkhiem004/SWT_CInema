@@ -95,6 +95,14 @@
             .add-combo-btn:hover {
                 background-color: #0056b3;
             }
+            .combo h3 {
+                margin: 10px 0;
+                font-size: 1.1em;
+                color: #333;
+                text-align: center;
+            }
+
+
         </style>
     </head>
     <body>
@@ -121,6 +129,7 @@
             %>
             <div class="combo">
                 <img src="image/<%= combo.getPoster_url() %>" alt="<%= combo.getCombo_name() %>">
+                <h3><%= combo.getCombo_name() %></h3> <!-- Hiển thị tên combo -->
                 <div class="overlay">
                     <a href="combo?id=<%= combo.getCombo_id() %>" class="btn">Chi tiết</a>
                 </div>

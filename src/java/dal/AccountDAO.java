@@ -147,6 +147,8 @@ public class AccountDAO extends DBContext {
                 Account account = new Account();
                 account.setId(rs.getInt("UserID"));
                 account.setFullname(rs.getString("fullname"));
+                account.setEmail(email);
+                account.setPassword(password); //Here
                 account.setPhoneNumber(rs.getString("phoneNumber"));
                 account.setGender(rs.getString("gender"));
                 account.setRole(rs.getString("role"));
@@ -192,7 +194,7 @@ public class AccountDAO extends DBContext {
         return account;
     }
 
-      public Account getAccountByUserID(int id) {
+    public Account getAccountByUserID(int id) {
         Account account = null;
         String query = "SELECT * FROM Users WHERE UserID = ?";
 
@@ -235,6 +237,28 @@ public class AccountDAO extends DBContext {
             ps.setString(5, account.getRole());
             ps.setString(6, account.getStatus());
             ps.setInt(7, account.getId());
+            System.out.println("Requête SQL : " + sql); // Imprimer la requête SQL
+            System.out.println("ID du compte : " + account.getId()); // Imprimer l'ID du compte
+            int rowsAffected = ps.executeUpdate();
+            System.out.println("Lignes affectées : " + rowsAffected); // Imprimer le nombre de lignes affectées
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public boolean updateAccountWithNewPass(Account account) {
+        String sql = "UPDATE Users SET FullName = ?, Email = ?, PhoneNumber = ?, Address = ?, Role = ?, Status = ?, Password = ?  WHERE UserID = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, account.getFullname());
+            ps.setString(2, account.getEmail());
+            ps.setString(3, account.getPhoneNumber());
+            ps.setString(4, account.getAddress());
+            ps.setString(5, account.getRole());
+            ps.setString(6, account.getStatus());
+            ps.setString(7, account.getPassword());
+            ps.setInt(8, account.getId());
             System.out.println("Requête SQL : " + sql); // Imprimer la requête SQL
             System.out.println("ID du compte : " + account.getId()); // Imprimer l'ID du compte
             int rowsAffected = ps.executeUpdate();
@@ -361,7 +385,7 @@ public class AccountDAO extends DBContext {
         return success;
     }
 
-       public boolean blockAccount(String id) {
+    public boolean blockAccount(String id) {
         String sql = "UPDATE Users SET Status = 'Suspend' WHERE UserID = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, id);
@@ -386,7 +410,6 @@ public class AccountDAO extends DBContext {
         }
         return false;
     }
-
 
     public List<Account> getAllAccountByText(String search) {
         List<Account> list = new ArrayList<>();
@@ -423,6 +446,50 @@ public class AccountDAO extends DBContext {
         }
 
         return list;
+    }
+
+    public Account getAccountById(int id) {
+        Account account = null;
+        try (PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Users WHERE UserID = ?")) {
+
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                account = new Account(
+                        rs.getInt("UserID"),
+                        rs.getString("FullName"),
+                        rs.getString("Email"),
+                        rs.getString("PhoneNumber"),
+                        rs.getString("Password"),
+                        rs.getString("Gender"),
+                        rs.getString("Address"),
+                        rs.getDate("DateOfBirth"),
+                        rs.getString("Role"),
+                        rs.getString("Status"),
+                        rs.getTimestamp("CreatedAt"),
+                        rs.getTimestamp("UpdatedAt")
+                );
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return account;
+    }
+
+    public boolean updateUserRole(int userId, String role) {
+        try (PreparedStatement stmt = connection.prepareStatement("UPDATE Users SET Role = ? WHERE UserID = ?")) {
+
+            stmt.setString(1, role);
+            stmt.setInt(2, userId);
+
+            int rowsUpdated = stmt.executeUpdate();
+            return rowsUpdated > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public static void main(String[] args) {

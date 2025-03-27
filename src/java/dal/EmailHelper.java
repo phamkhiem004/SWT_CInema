@@ -19,18 +19,18 @@ public class EmailHelper {
     public static final String TITLE_PROJECT = "SWP391 - TEAM5 - SE1874-JS - Agency Project";
 
     public static void sendEmailRequestContractSuccess(String toEmail, String subject, String fullName, String contractCode, String content) {
-        final String username = "fcareinsurance@gmail.com";
-        final String password = "cifxowsnfwdnywed";
+//        final String username = "ducnthe151031@fpt.edu.vn";
+//        final String password = "hetl oeqs krau sldk";
 
-        Properties props = new Properties();
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.port", "587");
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        Session s = Session.getInstance(props, new javax.mail.Authenticator() {
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "587");
+        Session s = Session.getInstance(properties, new javax.mail.Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(username, password);
+                return new PasswordAuthentication(EMAIL_USERNAME, EMAIL_PASSWORD);
             }
         });
         String message = "<!DOCTYPE html>\n"
@@ -50,7 +50,7 @@ public class EmailHelper {
                 + "</html>";
         try {
             Message msg = new MimeMessage(s);
-            msg.setFrom(new InternetAddress(username));
+            msg.setFrom(new InternetAddress(EMAIL_USERNAME));
             msg.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
             msg.setSubject(MimeUtility.encodeText(subject, "utf-8", "B")); // Encode the subject
             msg.setContent(message, "text/html; charset=utf-8");

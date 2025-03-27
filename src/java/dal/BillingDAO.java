@@ -17,6 +17,29 @@ import model.BillingCombo;
  */
 public class BillingDAO extends DBContext {
 
+    public Billing getBillingById(String billingID) {
+        String query = "SELECT * FROM Billing WHERE BillingID = ?";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, billingID);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Billing billing = new Billing();
+                billing.setBillingID(rs.getString("BillingID"));
+                billing.setUserID(rs.getInt("UserID"));
+                billing.setShowtimeID(rs.getInt("ShowtimeID"));
+                billing.setTotalAmount(rs.getBigDecimal("TotalAmount"));
+                billing.setPaymentMethod(rs.getString("PaymentMethod"));
+                billing.setPaymentStatus(rs.getString("PaymentStatus"));
+                billing.setDiscountID(rs.getInt("DiscountID"));
+                billing.setBookingDate(rs.getDate("BookingDate"));
+                return billing;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public String getEmailByUserID(int userID) {
         String sql = "SELECT Email FROM Users WHERE UserID = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -27,11 +50,12 @@ public class BillingDAO extends DBContext {
                 }
             }
         } catch (SQLException e) {
-            
+
         }
         return null; // Trả về null nếu không tìm thấy
     }
-      // Lấy tất cả các hoá đơn
+    // Lấy tất cả các hoá đơn
+
     public List<Billing> getAllBillings() {
         List<Billing> billingList = new ArrayList<>();
         String query = "SELECT * FROM billing"; // Cập nhật tên bảng và trường nếu cần
@@ -54,6 +78,7 @@ public class BillingDAO extends DBContext {
         }
         return billingList;
     }
+
     public void updatePaymentStatus(String billingID) {
         String sql = "UPDATE Billing SET PaymentStatus = 'Completed' WHERE BillingID = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -63,24 +88,25 @@ public class BillingDAO extends DBContext {
             e.printStackTrace();
         }
     }
+
     public boolean updatePaymentStatus(String billingID, String status) {
-    String query = "UPDATE billing SET paymentStatus = ? WHERE billingID = ?";
-    try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(query)) {
-        statement.setString(1, status); // Cập nhật trạng thái
-        statement.setString(2, billingID); // Cập nhật billingID
+        String query = "UPDATE Billing SET PaymentStatus = ? WHERE BillingID like ?";
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, status); // Cập nhật trạng thái
+            statement.setString(2, billingID); // Cập nhật billingID
 
-        int rowsAffected = statement.executeUpdate();
+            int rowsAffected = statement.executeUpdate();
 
-        return rowsAffected > 0; // Trả về true nếu cập nhật thành công
-    } catch (SQLException e) {
-        e.printStackTrace();
-        return false; // Nếu có lỗi, trả về false
+            return rowsAffected > 0; // Trả về true nếu cập nhật thành công
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false; // Nếu có lỗi, trả về false
+        }
     }
-}
 
     // Lấy thông tin thanh toán
     public Billing getBillingByID(String billingID) {
-        String sql = "SELECT * FROM Billing WHERE BillingID = ?";
+        String sql = "SELECT * FROM Billing WHERE BillingID like ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, billingID);
             try (ResultSet rs = ps.executeQuery()) {
@@ -103,6 +129,32 @@ public class BillingDAO extends DBContext {
         return null;
     }
 
+    // Lấy thông tin thanh toán
+    public List<Billing> getBillingByUserID(int userID) {
+        List<Billing> billingList = new ArrayList<>();
+        String sql = "SELECT * FROM Billing WHERE userID = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, userID);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    billingList.add(new Billing(
+                            rs.getString("BillingID"),
+                            rs.getInt("UserID"),
+                            rs.getInt("ShowtimeID"),
+                            rs.getBigDecimal("TotalAmount"),
+                            rs.getString("PaymentMethod"),
+                            rs.getString("PaymentStatus"),
+                            rs.getInt("DiscountID"),
+                            rs.getDate("BookingDate")
+                    ));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return billingList;
+    }
+
     // Lấy danh sách ghế đã đặt
     public List<String> getSeatsByBillingID(String billingID) {
         List<String> seats = new ArrayList<>();
@@ -119,7 +171,7 @@ public class BillingDAO extends DBContext {
         }
         return seats;
     }
-    
+
     // Lấy danh sách combo theo billing
     public List<BillingCombo> getCombosByBillingID(String billingID) {
         List<BillingCombo> combos = new ArrayList<>();
@@ -141,8 +193,17 @@ public class BillingDAO extends DBContext {
         }
         return combos;
     }
+    public void updateQuantity(int comboID,int Quantity) {
+        String sql = "Update Combo set Quantity = (Quantity - ?) where ComboID = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, Quantity);
+            ps.setInt(2, comboID);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
- 
     public String getMovieNameByShowtimeID(int showtimeID) {
         String sql = "SELECT m.Title FROM Showtime s JOIN Movie m ON s.MovieID = m.MovieID WHERE s.ShowtimeID = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -323,11 +384,63 @@ public class BillingDAO extends DBContext {
     public void updatePaymentMethod(String billingID, String paymentMethod) {
         String sql = "UPDATE Billing SET PaymentMethod = ? WHERE BillingID = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setString(1, paymentMethod);
+            ps.setString(1, "QR Pay");
             ps.setString(2, billingID);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
+    public List<Billing> getAllBillsByText(String search) {
+        List<Billing> list = new ArrayList<>();
+        String sql = "SELECT * FROM Billing WHERE BillingID LIKE ? OR UserID LIKE ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            String searchText = "%" + search + "%";
+            ps.setString(1, searchText);
+            ps.setString(2, searchText); // UserID là INT nhưng truyền dưới dạng String để dùng LIKE
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Billing bill = new Billing();
+                bill.setBillingID(rs.getString("BillingID"));
+                bill.setUserID(rs.getInt("UserID"));
+                bill.setShowtimeID(rs.getInt("ShowtimeID"));
+                bill.setTotalAmount(rs.getBigDecimal("TotalAmount"));
+                bill.setPaymentMethod(rs.getString("PaymentMethod"));
+                bill.setPaymentStatus(rs.getString("PaymentStatus"));
+                bill.setDiscountID(rs.getInt("DiscountID"));
+                bill.setBookingDate(rs.getDate("BookingDate"));
+
+                list.add(bill);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public boolean declineBill(String billingID) {
+        String sql = "UPDATE Billing SET PaymentStatus = 'Cancelled' WHERE BillingID = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, billingID);
+            int affectedRows = ps.executeUpdate();
+            return affectedRows > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean deleteBillingById(String billingID) {
+        String query = "DELETE FROM Billing WHERE billingID = ?";
+        try ( PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, billingID);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }

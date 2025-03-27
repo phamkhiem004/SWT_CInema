@@ -20,6 +20,14 @@
         <servlet-name>CompletePaymentServlet</servlet-name>
         <servlet-class>controller.CompletePaymentServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PaymentServlet</servlet-name>
+        <servlet-class>controller.PaymentServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ContinueBilling</servlet-name>
+        <servlet-class>controller.ContinueBilling</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AccountServlet</servlet-name>
         <url-pattern>/account</url-pattern>
@@ -39,5 +47,13 @@
     <servlet-mapping>
         <servlet-name>CompletePaymentServlet</servlet-name>
         <url-pattern>/completePayment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PaymentServlet</servlet-name>
+        <url-pattern>/payment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ContinueBilling</servlet-name>
+        <url-pattern>/continueBilling</url-pattern>
     </servlet-mapping>
 </web-app>

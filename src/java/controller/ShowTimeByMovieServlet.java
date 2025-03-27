@@ -7,6 +7,7 @@ package controller;
 import dal.CinemaDAO;
 import dal.DBContext;
 import dal.MovieDAO;
+import dal.RoomDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,6 +24,7 @@ import java.sql.Connection;
 
 import model.Cinema;
 import model.Movie;
+import model.Room;
 
 /**
  *
@@ -72,13 +74,12 @@ public class ShowTimeByMovieServlet extends HttpServlet {
         try {
             int movieId = Integer.parseInt(request.getParameter("id"));
 
-            // Kết nối DB
             DBContext dbContext = new DBContext();
             Connection conn = dbContext.connection;
             CinemaDAO cinemaDAO = new CinemaDAO(conn);
             MovieDAO movieDAO = new MovieDAO(conn);
+            RoomDAO roomDAO = new RoomDAO(conn);
 
-            // Lấy thông tin phim
             Movie movie = movieDAO.getMoviesByID(movieId);
             if (movie == null) {
                 response.sendError(HttpServletResponse.SC_NOT_FOUND, "Không tìm thấy phim!");
@@ -86,26 +87,28 @@ public class ShowTimeByMovieServlet extends HttpServlet {
             }
             request.setAttribute("movieTitle", movie.getTitle());
 
-            // Lấy danh sách rạp chiếu phim
             List<Cinema> cinemas = cinemaDAO.getCinemasByMovieId(movieId);
             request.setAttribute("cinemas", cinemas);
 
-            // Lấy danh sách suất chiếu của từng rạp
             for (Cinema cinema : cinemas) {
-                List<ShowTime> showTimes = movieDAO.getListShowTime(movieId, cinema.getCinemaID());
-                request.setAttribute("showTimes_" + cinema.getCinemaID(), showTimes);
+                List<Room> rooms = roomDAO.getRoomsByCinema(cinema.getCinemaID());
+                request.setAttribute("rooms_" + cinema.getCinemaID(), rooms);
+
+                for (Room room : rooms) {
+                    List<ShowTime> showTimes = movieDAO.getListShowTimeByRoom(movieId, room.getRoomID());
+                    request.setAttribute("showTimes_" + room.getRoomID(), showTimes);
+                }
             }
 
-            // Gửi dữ liệu đến trang JSP
             RequestDispatcher dispatcher = request.getRequestDispatcher("showtime_list.jsp");
             dispatcher.forward(request, response);
-
         } catch (NumberFormatException e) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID phim không hợp lệ!");
         } catch (SQLException e) {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Lỗi khi lấy dữ liệu lịch chiếu!");
         }
+
     }
 
     /**

@@ -79,7 +79,7 @@
         }
         .btn {
             padding: 10px 15px;
-            background-color: #007bff;
+            background-color: #dc3545;
             color: white;
             text-decoration: none;
             border-radius: 5px;
@@ -87,7 +87,7 @@
             transition: background-color 0.3s ease;
         }
         .btn:hover {
-            background-color: #0056b3;
+            background-color: #a71d2a;
         }
         .movie-list h2 {
             margin: 0; /* Loại bỏ margin mặc định của thẻ h2 */

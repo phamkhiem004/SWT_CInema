@@ -1,92 +1,135 @@
-<%-- 
-    Document   : BillDetail
-    Created on : Feb 28, 2025, 12:55:15 AM
-    Author     : DUNGVT
---%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="model.Billing"%>
 <!DOCTYPE html>
-<html>
+<html lang="vi">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <link rel="stylesheet" href="css/billstyles.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Chi Tiết Hóa Đơn</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                background-color: #f9f6ef;
+                padding: 0px;
+            }
+            .bill-container {
+                width: 350px;
+                background: white;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                text-align: center;
+                font-family: Arial, sans-serif;
+                margin: 30px auto;
+                border: 2px dashed #333;
+            }
+
+            .bill-header {
+                border-bottom: 2px solid #ddd;
+                padding-bottom: 10px;
+                margin-bottom: 15px;
+            }
+
+            .bill-header h2 {
+                margin: 0;
+                font-size: 18px;
+                color: #333;
+            }
+
+            .bill-body {
+                text-align: left;
+            }
+
+            .bill-body table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            .bill-body th {
+                text-align: left;
+                font-weight: bold;
+                padding: 5px 0;
+            }
+
+            .bill-body td {
+                text-align: right;
+                padding: 5px 0;
+                font-weight: bold;
+            }
+
+            .bill-footer {
+                border-top: 2px solid #ddd;
+                padding-top: 10px;
+                margin-top: 15px;
+                font-size: 14px;
+                color: #777;
+            }
+
+            .btn-primary {
+                display: inline-block;
+                padding: 8px 15px;
+                margin-top: 15px;
+                background: #007bff;
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
+                font-weight: bold;
+            }
+
+            .btn-primary:hover {
+                background: #0056b3;
+            }
+
+        </style>
     </head>
     <body>
-        <div class="bill-detail-container">
-            <!-- 🎬 Poster + Thông tin phim -->
+        <jsp:include page="header.jsp" />
+        <%
+                        Billing bill = (Billing) request.getAttribute("bill");
+                        if (bill != null) {
+        %>
+        <div class="bill-container">
             <div class="bill-header">
-                <img src="${requestScope.poster_url}" class="movie-poster">
+                <h2>Chi tiết hóa đơn</h2>
+                <p>Ngày: <%= bill.getBookingDate() %></p>
+            </div>
 
-                <!-- 📋 Bảng thông tin vé dạng dọc -->
-                <table class="bill-table bill-info-table">
-                    <tbody>
-                        <tr><td><strong>Movie Name:</strong> <span>${requestScope.bill.movie_name}</span></td></tr>
-                        <tr><td><strong>Booking Date:</strong> <span>${requestScope.bill.booking_date}</span></td></tr>
-                        <tr><td><strong>Showtime:</strong> <span>${requestScope.showtime}</span></td></tr>
-                        <tr><td><strong>Cinema:</strong> <span>${requestScope.cinema_name}</span></td></tr>
-                        <tr><td><strong>Room Name:</strong> <span>${requestScope.room_name}</span></td></tr>
-                        <tr><td><strong>Discount:</strong> <span>${requestScope.bill.discount} %</span></td></tr>
-                        <tr><td><strong>Payment Method:</strong> <span>${requestScope.bill.payment_method}</span></td></tr>
-                        <tr><td><strong>Payment Status:</strong> <span class="payment-status
-                                                                       ${requestScope.bill.payment_status == "Completed" ? "Paid":""}
-                                                                       ${requestScope.bill.payment_status == "Pending" ? "Pending":""}
-                                                                       ${requestScope.bill.payment_status == "Cancelled" ? "Failed":""}
-                                                                       ">${requestScope.bill.payment_status}</span></td></tr>
-                    </tbody>
+            <div class="bill-body">
+                <table>
+                    <tr><th>Mã Hóa Đơn:</th><td><%= bill.getBillingID() %></td></tr>
+                    <tr><th>Mã Người Dùng:</th><td><%= bill.getUserID() %></td></tr>
+                    <tr><th>Mã Suất Chiếu:</th><td><%= bill.getShowtimeID() %></td></tr>
+                    <tr><th>Tổng Tiền:</th><td><%= bill.getTotalAmount() %> VNĐ</td></tr>
+                    <tr><th>Phương Thức Thanh Toán:</th><td><%= bill.getPaymentMethod() %></td></tr>
+                    <tr><th>Trạng Thái Thanh Toán:</th><td><%= bill.getPaymentStatus() %></td></tr>
+                    <tr><th>Mã Giảm Giá:</th><td><%= bill.getDiscountID() != null ? bill.getDiscountID() : "Không áp dụng" %></td></tr>
                 </table>
             </div>
 
-            <!-- 📋 Bảng thông tin ghế ngồi -->
-            <table class="bill-table">
-                <thead>
-                    <tr>
-                        <th>Seat Type</th>
-                        <th>Seat Name</th>
-                        <th>Seat Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach items="${requestScope.listS}" var="s">
-                        <tr>
-                            <td>${s.seat_type}</td>
-                            <td>${s.seat_name}</td>
-                            <td>${s.seat_price} USD</td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-
-            <!-- 🍿 Bảng thông tin combo -->
-            <table class="bill-table">
-                <thead>
-                    <tr>
-                        <th>Combo Name</th>
-                        <th>Description</th>
-                        <th>Quantity</th>
-                        <th>Combo Price</th>
-                        <th>Total Combo Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach items="${requestScope.listC}" var="c">
-                        <tr>
-                            <td>${c.combo_name}</td>
-                            <td>${c.description}</td>
-                            <td>${c.quantity}</td>
-                            <td>${c.price} USD</td>
-                            <td>${c.price * c.quantity} USD</td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-
-            <!-- 🎟 Tổng hóa đơn -->
-            <div class="total-bill-container">
-                <p><strong>Total Price Before Discount:</strong> <span>${requestScope.totalprice_c} USD</span></p>
-                <p><strong>Discount:</strong> <span>- ${requestScope.discount_price} USD</span></p>
-                <p class="final-price"><strong>Total Bill Price:</strong> <span>${requestScope.totalprice_f} USD</span></p>
+            <div class="bill-footer">
+                <%
+                    String status = bill.getPaymentStatus();
+                    if ("Completed".equalsIgnoreCase(status)) {
+                %>
+                <p style="color: green; font-weight: bold;">✅ Thanh toán thành công</p>
+                <p>Cảm ơn quý khách đã sử dụng dịch vụ!</p>
+                <%
+                    } else if ("Pending".equalsIgnoreCase(status)) {
+                %>
+                <p style="color: orange; font-weight: bold;">⏳ Hóa đơn đang chờ xác nhận</p>
+                <%
+                    } else if ("Cancelled".equalsIgnoreCase(status)) {
+                %>
+                <p style="color: red; font-weight: bold;">❌ Hóa đơn đã bị hủy bỏ</p>
+                <%
+                    }
+                %>
             </div>
         </div>
+        <%}
+        %>
+
+        <jsp:include page="footer.jsp" />
     </body>
 </html>

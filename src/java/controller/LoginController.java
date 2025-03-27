@@ -24,23 +24,20 @@ public class LoginController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-       protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-     HttpSession session = req.getSession();
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
         Account acc = (Account) session.getAttribute("Customer");
         if (acc != null) {
-            if (acc.getRole().equalsIgnoreCase("Staff")) {
-                resp.sendRedirect("staffHome");
-            } else if (acc.getRole().equalsIgnoreCase("Customer")) {
+            if (acc.getRole().equalsIgnoreCase("Admin")) {
+                resp.sendRedirect("accounts");
+            } else {
                 resp.sendRedirect("home");
-            } else if (acc.getRole().equalsIgnoreCase("Admin")) {
-                resp.sendRedirect("homeManager");
             }
         } else {
             req.getRequestDispatcher("login.jsp").forward(req, resp);
         }
-
-   
     }
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -50,7 +47,7 @@ public class LoginController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-     protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
@@ -60,26 +57,30 @@ public class LoginController extends HttpServlet {
 
         if (acc != null) {
             if (acc.getStatus().equals("Active")) {
-
-                session.setAttribute("account", acc);
-                 List<Movie> cart = (List<Movie>) session.getAttribute("cart");
-            if (cart != null) {
-                // Set cart items in request attribute
-                request.setAttribute("cart", cart);
-            }
-                 response.sendRedirect("home");
+                if (acc.getRole().equalsIgnoreCase("Admin")) {
+                    session.setAttribute("account", acc);
+                    response.sendRedirect("accounts");
+                } else if (acc.getRole().equalsIgnoreCase("Staff") || acc.getRole().equalsIgnoreCase("Customer")) {
+                    session.setAttribute("account", acc);
+                    List<Movie> cart = (List<Movie>) session.getAttribute("cart");
+                    if (cart != null) {
+                        request.setAttribute("cart", cart);
+                    }
+                    response.sendRedirect("home");
+                } else {
+                    // Nếu không phải Admin hoặc Customer
+                    request.setAttribute("message", "Access denied");
+                    request.getRequestDispatcher("login.jsp").forward(request, response);
+                }
             } else {
                 request.setAttribute("message", "User is blocked");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
-
             }
-
         } else {
             request.setAttribute("message", "User or Password incorrect!");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
-
 
     @Override
     public String getServletInfo() {

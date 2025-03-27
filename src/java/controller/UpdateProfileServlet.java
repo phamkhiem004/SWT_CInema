@@ -101,7 +101,7 @@ public class UpdateProfileServlet extends HttpServlet {
 
             // Gửi lại thông báo và dữ liệu mới được cập nhật
             request.setAttribute("alert_true_info", "Cập nhật thông tin cá nhân thành công!");
-            request.setAttribute("u", ad.getUserById(id_user));
+            request.setAttribute("u", user);
 
             // Gửi lại lịch sử giao dịch
             List<Bill> listBill = ud.getListBillByUserID("", "", id_user);
@@ -114,14 +114,17 @@ public class UpdateProfileServlet extends HttpServlet {
             // Đối chiếu với mật khẩu cũ
             if (cpass.equals(user.getPassword())) {
                 String npass = request.getParameter("npass");
-
+                String cnpass = request.getParameter("cnpass");
                 // Tham chiếu mật khẩu mới có khác mật khẩu cũ hay không
                 if (npass.equals(cpass)) {
                     request.setAttribute("alert_false_npass",
                             "Mật khẩu mới không được giống mật khẩu cũ! Vui lòng thử lại!");
+                    
+                } else if (!npass.equals(cnpass)) {
+                    request.setAttribute("alert_false_npass", "Mật khẩu mới không trùng khớp!");
                 } else {
                     // Thực hiện hành đông cập nhật mật khẩu
-                    ad.updateAccount(new Account(id_user, user.getFullname(), user.getEmail(),
+                    ad.updateAccountWithNewPass(new Account(id_user, user.getFullname(), user.getEmail(),
                             user.getPhoneNumber(), npass, user.getGender(), user.getAddress(),
                             (Date) user.getDateOfBirth(), user.getRole(), user.getStatus(), user.getCreatedAt(),
                             user.getUpdatedAt()));

@@ -5,22 +5,20 @@
 --%>
 
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="java.util.List, model.Cinema, model.ShowTime" %>
+<%@ page import="java.util.List, model.Cinema, model.ShowTime, model.Room" %>
 <%@page import="dal.AccountDAO"%>
 <%@page import="model.Account"%>
 <%
-    // Kiểm tra nếu chưa đăng nhập thì chuyển hướng về trang login.jsp
     Account account = (Account) session.getAttribute("account");
-
     if (account == null ) {
-    response.sendRedirect("login.jsp");
-    return;
-}
+        response.sendRedirect("login.jsp");
+        return;
+    }
 %>
 <%
-    String movieTitle = (String) request.getAttribute("movieTitle"); // Lấy từ request
+    String movieTitle = (String) request.getAttribute("movieTitle");
     if (movieTitle == null) {
-        movieTitle = (String) session.getAttribute("movieTitle"); // Thử lấy từ session nếu có
+        movieTitle = (String) session.getAttribute("movieTitle");
     }
 %>
 <html>
@@ -58,6 +56,12 @@
                 color: #34495e;
                 margin-bottom: 10px;
             }
+            .room-box {
+                padding: 10px;
+                background: #dfe6e9;
+                margin: 10px 0;
+                border-radius: 5px;
+            }
             .showtime-container {
                 display: flex;
                 flex-wrap: wrap;
@@ -72,16 +76,14 @@
                 border-radius: 5px;
                 font-size: 14px;
                 transition: 0.3s;
+                text-decoration: none;
             }
             .showtime-btn:hover {
                 background: #3498db;
             }
-            .no-cinema {
-                text-align: center;
+            .no-showtime {
                 color: red;
-                font-size: 20px;
-                font-weight: bold;
-                margin-top: 20px;
+                font-size: 16px;
             }
         </style>
     </head>
@@ -93,23 +95,31 @@
             if (cinemas != null && !cinemas.isEmpty()) {
                 for (Cinema cinema : cinemas) {
                     out.println("<div class='cinema-box'>");
-                    out.println("<h3>" + cinema.getName() + "</h3>");
+                    out.println("<h3 class='cinema-name'>" + cinema.getName() + "</h3>");
 
-                    List<ShowTime> showTimes = (List<ShowTime>) request.getAttribute("showTimes_" + cinema.getCinemaID());
-                    if (showTimes != null && !showTimes.isEmpty()) {
-                        for (ShowTime show : showTimes) {
-                            out.println("<span class='showtime-btn'>" + show.getStartTime().toString().replace("T", " ") + "</span>");%>
-                            <button class="btn btn-success"><a href="booking?showtimeID=<%= show.getShowTimeID() %>">Đặt Vé</a></button>
-                        <%}
+                    List<Room> rooms = (List<Room>) request.getAttribute("rooms_" + cinema.getCinemaID());
+                    if (rooms != null && !rooms.isEmpty()) {
+                        for (Room room : rooms) {
+                            out.println("<div class='room-box'><strong>Phòng: " + room.getName() + "</strong></div>");
+                            List<ShowTime> showTimes = (List<ShowTime>) request.getAttribute("showTimes_" + room.getRoomID());
+                            if (showTimes != null && !showTimes.isEmpty()) {
+                                for (ShowTime show : showTimes) {
+                                    out.println("<a class='showtime-btn' href='booking?showtimeID=" + show.getShowTimeID() + "'>" + show.getStartTime().toString().replace("T", " ") + "</a>");
+                                }
+                            } else {
+                                out.println("<p class='no-showtime'>Không có suất chiếu nào.</p>");
+                            }
+                        }
                     } else {
-                        out.println("<p class='no-cinema'>Không có suất chiếu nào.</p>");
+                        out.println("<p class='no-showtime'>Không có phòng nào.</p>");
                     }
                     out.println("</div>");
                 }
             } else {
-                out.println("<p class='no-cinema'>Không tìm thấy rạp nào đang chiếu phim này.</p>");
+                out.println("<p class='no-showtime'>Không tìm thấy rạp nào đang chiếu phim này.</p>");
             }
         %>
         <jsp:include page="footer.jsp" />
     </body>
 </html>
+

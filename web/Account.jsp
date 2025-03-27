@@ -6,6 +6,16 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="dal.AccountDAO"%>
+<%@page import="model.Account"%>
+<%
+    Account account = (Account) session.getAttribute("account");
+
+    if (account == null || (!"Admin".equals(account.getRole()))) {
+    response.sendRedirect("home.jsp");
+    return;
+}
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -104,7 +114,7 @@
                     </div>
                 </div>
 
-                <a href="addAccount" class="btn btn-success" style="margin-bottom: 1em">Add account</a>
+
 
                 <table class="customer-table">
                     <thead>
@@ -140,7 +150,8 @@
                                 <td>${a.phoneNumber}</td>
                                 <td class="${a.status == 'Active' ? 'status-active' : 'status-blocked'}">${a.status}</td>
                                 <td>
-                                    <a href="accounts?action=update&id=${a.id}" class="btn btn-success btn-sm">Edit</a>
+                                    <a href="editAccount.jsp?id=${a.id}" class="btn btn-success btn-sm">Edit</a>
+
                                     <form action="blockUser" method="post" style="display:inline;">
                                         <input type="hidden" name="id" value="${a.id}">
                                         <c:choose>
@@ -153,7 +164,7 @@
                                                 <!-- Nút UNBLOCK -->
                                                 <input type="hidden" name="action" value="unblock">
                                                 <button type="submit" class="btn btn-success btn-sm" onclick="return confirm('Are you sure you want to unblock this user?')">Unblock</button>
-                                            </c:when>
+                                            </c:when>   
                                         </c:choose>
                                     </form>
                                 </td>

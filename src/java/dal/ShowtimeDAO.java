@@ -9,16 +9,16 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import model.Movie;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import model.ShowTime;
+import java.sql.SQLException;
 
 /**
  *
  * @author Acer Predator
  */
 public class ShowtimeDAO extends DBContext {
-
-    public static void main(String[] args) {
-        System.out.println(new ShowtimeDAO().getNowShowingMovies());
-    }
 
     public List<Movie> getNowShowingMovies() {
         List<Movie> movies = new ArrayList<>();
@@ -49,4 +49,57 @@ public class ShowtimeDAO extends DBContext {
         }
         return movies;
     }
+
+    public void addShowtime(ShowTime showtime) {
+        String sql = "INSERT INTO Showtime (MovieID, RoomID,StartTime,Status) VALUES (?, ?,?,?)";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, showtime.getMovieID());
+            stmt.setInt(2, showtime.getRoomID());
+            stmt.setTimestamp(3, Timestamp.valueOf(showtime.getStartTime())); // Chuyển Date -> Timestamp
+            stmt.setString(4, showtime.getStatus());
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void deactivateShowTime(int showTimeID) {
+        String sql = "UPDATE Showtime SET Status = 'Inactive' WHERE ShowtimeID = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, showTimeID);
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<ShowTime> getAllScreeningTimes() {
+        List<ShowTime> list = new ArrayList<>();
+        String sql = "SELECT s.ShowtimeID, m.MovieID, c.CinemaID, r.RoomID, s.StartTime, s.Status "
+                + "FROM Showtime s "
+                + "JOIN Room r ON s.RoomID = r.RoomID "
+                + "JOIN Cinema c ON r.CinemaID = c.CinemaID "
+                + "JOIN Movie m ON s.MovieID = m.MovieID where s.Status ='Active'";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                ShowTime screening = new ShowTime();
+                screening.setShowTimeID(rs.getInt("ShowtimeID"));
+                screening.setMovieID(rs.getInt("MovieID"));
+                screening.setCinemaID(rs.getInt("CinemaID"));
+                screening.setRoomID(rs.getInt("RoomID"));
+                Timestamp timestamp = rs.getTimestamp("StartTime");
+                LocalDateTime startTime = timestamp.toLocalDateTime();
+                screening.setStartTime(startTime);
+                screening.setStatus(rs.getString("Status"));
+                list.add(screening);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
 }

@@ -15,19 +15,22 @@ import dal.BillingDAO;
 import jakarta.servlet.RequestDispatcher;
 import java.util.List;
 import model.Billing;
+
 /**
  *
  * @author ADMIN
  */
 @WebServlet(name = "BillingServlet", urlPatterns = {"/billing"})
 public class BillingServlet extends HttpServlet {
-    
+
     private BillingDAO billingDAO;
-      public BillingServlet() {
+
+    public BillingServlet() {
         super();
         billingDAO = new BillingDAO();  // Khởi tạo DAO
     }
-       protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Lấy tất cả các hoá đơn từ BillingDAO
         List<Billing> billingList = billingDAO.getAllBillings();
 
@@ -38,6 +41,22 @@ public class BillingServlet extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("billing-list.jsp");
         dispatcher.forward(request, response);
     }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String search = request.getParameter("search");  // Lấy giá trị từ ô tìm kiếm
+
+        List<Billing> billingList;
+
+        if (search != null && !search.trim().isEmpty()) {
+            billingList = billingDAO.getAllBillsByText(search);
+        } else {
+            billingList = billingDAO.getAllBillings(); // Nếu không nhập gì, lấy toàn bộ danh sách
+        }
+
+        request.setAttribute("billingList", billingList);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("billing-list.jsp");
+        dispatcher.forward(request, response);
+    }
+
 }
-
-

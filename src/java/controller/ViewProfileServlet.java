@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dal.BillingDAO;
 import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,6 +17,7 @@ import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.Account;
 import model.Bill;
+import model.Billing;
 
 /**
  *
@@ -68,8 +70,9 @@ public class ViewProfileServlet extends HttpServlet {
             response.sendRedirect("login");
         } else {
             UserDAO ud = new UserDAO();
+            BillingDAO dao = new BillingDAO();
             request.setAttribute("u", acc);
-            List<Bill> listBill = ud.getListBillByUserID("", "", acc.getId());
+            List<Billing> listBill = dao.getBillingByUserID(acc.getId());
             request.setAttribute("listB", listBill);
             request.getRequestDispatcher("UserProfile.jsp").forward(request, response);
         }

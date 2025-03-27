@@ -22,10 +22,7 @@
                 </div>
             </div>
             <div class="sidebar">
-                <a href="admindashboard.jsp" class="link">
-                    <span class="material-symbols-outlined"> grid_view </span>
-                    <h3>Dashboard</h3>
-                </a>
+                  
 
                 <a href="accounts" class="link">
                     <span class="material-symbols-outlined"> person </span>
@@ -35,18 +32,11 @@
                     <span class="material-symbols-outlined"> receipt_long </span>
                     <h3>Billing</h3>
                 </a>
-
-                <a href="#" class="link">
-                    <span class="material-symbols-outlined"> app_promo </span>
-                    <h3>Promotion</h3>
+                <a href="home.jsp" class="link">
+                    <span class="material-symbols-outlined"> home </span>
+                    <h3>Vào Trang chủ</h3>
                 </a>
-
-                <a href="#" class="link">
-                    <span class="material-symbols-outlined"> query_stats </span>
-                    <h3>Revenue</h3>
-                </a>
-
-                <a href="#" class="link">
+                <a href="logout" class="link">
                     <span class="material-symbols-outlined"> logout </span>
                     <h3>Log out</h3>
                 </a>

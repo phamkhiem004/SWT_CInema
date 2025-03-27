@@ -16,6 +16,21 @@ import java.util.List;
  */
 public class BillingSeatDAO extends DBContext {
 
+    public boolean hasBillingSeat(String billingID) {
+        String query = "SELECT COUNT(*) FROM Billing_Seat WHERE BillingID = ?";
+        try (
+                PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, billingID);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public List<String> getBookedSeats(int showtimeID) {
         List<String> bookedSeats = new ArrayList<>();
         String sql = "SELECT SeatName FROM Billing_Seat WHERE BillingID IN "
@@ -31,11 +46,12 @@ public class BillingSeatDAO extends DBContext {
         }
         return bookedSeats;
     }
+
     public List<String> getBookedSeatsByUser(int showtimeID, int accountID) {
         List<String> myBookedSeats = new ArrayList<>();
-        String sql = "SELECT bs.SeatName FROM Billing_Seat bs " +
-                     "JOIN Billing b ON bs.BillingID = b.BillingID " +
-                     "WHERE b.ShowtimeID = ? AND b.UserID = ? and b.PaymentStatus like 'Completed'";
+        String sql = "SELECT bs.SeatName FROM Billing_Seat bs "
+                + "JOIN Billing b ON bs.BillingID = b.BillingID "
+                + "WHERE b.ShowtimeID = ? AND b.UserID = ? and b.PaymentStatus like 'Completed'";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, showtimeID);
             stmt.setInt(2, accountID);

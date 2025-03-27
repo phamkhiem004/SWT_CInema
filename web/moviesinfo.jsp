@@ -132,7 +132,7 @@
            class="btn"
            style="background-color: <%= movie.getStatus().equals("Active") ? "red" : "green" %>;"
            onclick="return confirm('Bạn có chắc chắn muốn <%= movie.getStatus().equals("Active") ? "vô hiệu hóa" : "kích hoạt" %> mã giảm giá này?');">
-            <%= movie.getStatus().equals("Active") ? "❌ Vô hiệu hóa" : "✅ Kích hoạt" %>
+            <%= movie.getStatus().equals("Active") ? " Vô hiệu hóa" : "✅ Kích hoạt" %>
         </a>
         <% } %>
         <div class="movie-detail">

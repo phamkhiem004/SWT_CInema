@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import model.ShowTime;
@@ -222,7 +223,7 @@ public class MovieDAO extends DBContext {
 
     public List<ShowTime> getListShowTime(int MovieID, int CinemaID) throws SQLException {
         List<ShowTime> screening = new ArrayList<>();
-        String sql = "Select ShowtimeID, StartTime from ShowTime join Room ON ShowTime.RoomID = Room.RoomID where MovieID = ? and CinemaID = ?";
+        String sql = "Select ShowtimeID, StartTime from ShowTime join Room ON ShowTime.RoomID = Room.RoomID where MovieID = ? and CinemaID = ? and Showtime.Status = 'Active' ";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, MovieID);
@@ -246,7 +247,7 @@ public class MovieDAO extends DBContext {
         String sql = "SELECT DISTINCT Movie.MovieID FROM Movie "
                 + "JOIN ShowTime ON Movie.MovieID = ShowTime.MovieID "
                 + "JOIN Room ON Room.RoomID = ShowTime.RoomID "
-                + "WHERE CinemaID = ?";
+                + "WHERE CinemaID = ? and Movie.Status = 'Active'";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, cinemaID);
@@ -258,6 +259,28 @@ public class MovieDAO extends DBContext {
         }
         return movieIDs;
 
+    }
+
+    public List<ShowTime> getListShowTimeByRoom(int movieID, int roomID) throws SQLException {
+        List<ShowTime> showTimes = new ArrayList<>();
+        String sql = "SELECT * FROM Showtime WHERE MovieID = ? AND RoomID = ?";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, movieID);
+            ps.setInt(2, roomID);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    ShowTime showTime = new ShowTime();
+                    showTime.setShowTimeID(rs.getInt("ShowtimeID"));
+                    showTime.setMovieID(rs.getInt("MovieID"));
+                    showTime.setRoomID(rs.getInt("RoomID"));
+                    showTime.setStartTime(rs.getTimestamp("StartTime").toLocalDateTime());
+
+                    showTimes.add(showTime);
+                }
+            }
+        }
+        return showTimes;
     }
 
 }
