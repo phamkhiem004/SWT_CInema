@@ -12,6 +12,27 @@
     <meta charset="utf-8">
     <title>Đặt Lại Mật Khẩu</title>
     <link rel="stylesheet" href="css/login.css">
+    <script>
+    function validatePassword() {
+        let newPassword = document.getElementById("newPassword").value;
+        let confirmPassword = document.getElementById("confirmPassword").value;
+        let message = document.getElementById("passwordMessage");
+
+        // Kiểm tra mật khẩu có ít nhất 8 ký tự, bao gồm cả chữ và số
+        let passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+        if (!passwordRegex.test(newPassword)) {
+            message.innerText = "Mật khẩu phải có ít nhất 8 ký tự, bao gồm cả chữ và số.";
+            return false;
+        } else if (newPassword !== confirmPassword) {
+            message.innerText = "Mật khẩu nhập lại không khớp.";
+            return false;
+        } else {
+            message.innerText = "";
+            return true;
+        }
+    }
+</script>
 </head>
 <body class="bg-light">
     <jsp:include page="header.jsp"/>

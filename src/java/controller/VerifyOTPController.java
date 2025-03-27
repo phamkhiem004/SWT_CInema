@@ -25,7 +25,6 @@ public class VerifyOTPController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Lấy mã OTP người dùng nhập
         String userOTP = req.getParameter("OTP");
-        
         // Lấy mã OTP lưu trong session
         String sessionOTP = (String) req.getSession().getAttribute("OTP");
         
