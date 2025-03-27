@@ -15,19 +15,28 @@ import java.util.Date;
 public class ShowTime {
 
     private int ShowTimeID;
-    private int CinemaID;  
+    private int CinemaID;
     private int MovieID;
+    private int RoomID;
     private LocalDateTime StartTime;
-    
+    private String Status;
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String Status) {
+        this.Status = Status;
+    }
+
     int showtime_id;
     int movie_id;
     int room_id;
     Date showtime;
-    
 
     public ShowTime() {
     }
-
+    
     public ShowTime(int showtime_id, int movie_id, int room_id, Date showtime) {
         this.showtime_id = showtime_id;
         this.movie_id = movie_id;
@@ -67,17 +76,49 @@ public class ShowTime {
         this.showtime = showtime;
     }
 
-    
     public ShowTime(int MovieID, LocalDateTime StartTime) {
         this.MovieID = MovieID;
         this.StartTime = StartTime;
     }
 
-    public ShowTime(int ShowTimeID, int CinemaID, int MovieID, LocalDateTime StartTime) {
+//    public ShowTime(int ShowTimeID, int CinemaID, int MovieID, LocalDateTime StartTime) {
+//        this.ShowTimeID = ShowTimeID;
+//        this.CinemaID = CinemaID;
+//        this.MovieID = MovieID;
+//        this.StartTime = StartTime;
+//    }
+
+    public ShowTime(int ShowTimeID, int CinemaID, int RoomID, LocalDateTime StartTime, String Status) {
         this.ShowTimeID = ShowTimeID;
         this.CinemaID = CinemaID;
+        this.RoomID = RoomID;
+        this.StartTime = StartTime;
+        this.Status = Status;
+    }
+    
+    
+
+    public ShowTime(int ShowTimeID, int CinemaID, int RoomID, int MovieID, LocalDateTime StartTime) {
+        this.ShowTimeID = ShowTimeID;
+        this.CinemaID = CinemaID;
+        this.RoomID = RoomID;
         this.MovieID = MovieID;
         this.StartTime = StartTime;
+    }
+
+    public ShowTime(int ShowTimeID, int RoomID, int MovieID, LocalDateTime StartTime) {
+        this.ShowTimeID = ShowTimeID;
+        this.RoomID = RoomID;
+        this.MovieID = MovieID;
+        this.StartTime = StartTime;
+    }
+
+    public int getRoomID() {
+        return RoomID;
+    }
+
+    public void setRoomID(int RoomID) {
+        this.RoomID = RoomID;
     }
 
     public int getShowTimeID() {
@@ -112,9 +153,21 @@ public class ShowTime {
         this.StartTime = StartTime;
     }
 
+    public ShowTime(int ShowTimeID, int CinemaID, int MovieID, int RoomID, LocalDateTime StartTime, String Status) {
+        this.ShowTimeID = ShowTimeID;
+        this.CinemaID = CinemaID;
+        this.MovieID = MovieID;
+        this.RoomID = RoomID;
+        this.StartTime = StartTime;
+        this.Status = Status;
+    }
+    
+
     @Override
     public String toString() {
         return "ShowTime{" + "ShowTimeID=" + ShowTimeID + ", CinemaID=" + CinemaID + ", MovieID=" + MovieID + ", StartTime=" + StartTime + '}';
     }
+
+    
 
 }

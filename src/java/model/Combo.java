@@ -19,7 +19,7 @@ public class Combo {
     String status;
     String poster_url;
     int quantity;
-     private int comboID;
+    private int comboID;
     private String comboName;
     private String poster;
     private String descriptionD;

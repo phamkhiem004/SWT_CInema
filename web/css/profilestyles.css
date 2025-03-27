@@ -125,17 +125,18 @@ footer {
 
  🎬 Background toàn trang 
 */body {
-    background: url('https://source.unsplash.com/1600x900/?movie,cinema') no-repeat center center/cover;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+
+    text-align: center;
 }/*
 
 
 
- 📌 Container chính 
-*/.container {
+📌 Container chính 
+*/
+.container {
     display: flex;
     width: 80%;
     max-width: 1000px;
@@ -147,26 +148,30 @@ footer {
 }/*
 
  🎭 Chia màn hình thành 2 phần 
-*/.profile-container {
+*/
+.profile-container {
     flex: 1;
     padding: 20px;
     border-right: 2px solid #ccc;
 }/*
 
-*/.password-container {
+*/
+.password-container {
     flex: 1;
     padding: 20px;
 }/*
 
  🎬 Tiêu đề 
-*/h1 {
+*/
+h1 {
     text-align: center;
     margin-bottom: 15px;
     color: #333;
 }/*
 
  🔹 Input Styles 
-*/input {
+*/
+input {
     width: 100%;
     padding: 10px;
     margin: 8px 0;
@@ -175,7 +180,8 @@ footer {
 }/*
 
  📩 Nút Submit 
-*/button {
+*/
+button {
     width: 100%;
     padding: 12px;
     background: #FF4500;
@@ -196,7 +202,8 @@ button:hover {
 
 
  🎟 Responsive 
-*/@media (max-width: 768px) {
+*/
+@media (max-width: 768px) {
     .container {
         flex-direction: column;
     }
@@ -298,10 +305,11 @@ button:hover {
     text-align: left;
 }
 
-.transaction-table th, 
+.transaction-table th,
 .transaction-table td {
     padding: 10px;
     border-bottom: 1px solid #ddd;
+    text-align: center;
 }
 
 /* 🟢 Trạng thái thanh toán */
@@ -314,9 +322,18 @@ button:hover {
 }
 
 /* Màu sắc cho các trạng thái thanh toán */
-.paid { background: #4CAF50; color: white; }  /* Đã thanh toán */
-.pending { background: #FFC107; color: black; } /* Chờ xử lý */
-.failed { background: #F44336; color: white; } /* Thất bại */
+.paid {
+    background: #4CAF50;
+    color: white;
+}  /* Đã thanh toán */
+.pending {
+    background: #FFC107;
+    color: black;
+} /* Chờ xử lý */
+.failed {
+    background: #F44336;
+    color: white;
+} /* Thất bại */
 
 /* 🔍 Nút Xem Chi Tiết */
 .detail-btn {
@@ -336,7 +353,7 @@ button:hover {
 
 /* 📌 Responsive */
 @media (max-width: 768px) {
-    .transaction-table th, 
+    .transaction-table th,
     .transaction-table td {
         padding: 8px;
         font-size: 14px;

@@ -10,16 +10,16 @@ import java.util.Properties;
 public class EmailSender {
 
     public static void sendEmail(String to, String subject, String content) {
-        final String username = "fcareinsurance@gmail.com";
-        final String password = "cifxowsnfwdnywed";
+        final String username = "ducnthe151031@fpt.edu.vn";
+        final String password = "hetl oeqs krau sldk";
 
-        Properties props = new Properties();
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.port", "587");
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "587");
 
-        Session session = Session.getInstance(props, new Authenticator() {
+        Session session = Session.getInstance(properties, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(username, password);
             }

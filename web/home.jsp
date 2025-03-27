@@ -177,20 +177,23 @@
         %>
 
         <% if (account != null) { %>
-            <!-- Hiển thị phần chào mừng người dùng đã đăng nhập -->
-            <div class="cinema-info">
-                <h2>Chào mừng, <%= account.getFullname() %> đến với CBD Cinema!</h2>
-                <p>Trải nghiệm những bộ phim mới nhất với chất lượng âm thanh và hình ảnh tuyệt đỉnh.</p>
-                <a href="movies.jsp" class="btn1">Xem Phim Ngay</a>
-            </div>
+        <!-- Hiển thị phần chào mừng người dùng đã đăng nhập -->
+        <div class="cinema-info">
+            <h2>Chào mừng, <%= account.getFullname() %> đến với CBD Cinema!</h2>
+            <p>Trải nghiệm những bộ phim mới nhất với chất lượng âm thanh và hình ảnh tuyệt đỉnh.</p>
+            <a href="movies.jsp" class="btn1">Xem Phim Ngay</a>
+            <% if (account != null && ("Admin".equals(account.getRole()))) { %>
+            <a href="accounts" class="btn1">Quản lý Admin</a>
+            <% } %>
+        </div>
 
         <% } else { %>
-            <!-- Hiển thị phần nếu người dùng chưa đăng nhập -->
-            <div class="cinema-info">
-                <h2>Chào mừng đến với CBD Cinema!</h2>
-                <p>Trải nghiệm những bộ phim mới nhất với chất lượng âm thanh và hình ảnh tuyệt đỉnh.</p>
-                <a href="movies.jsp" class="btn1">Xem Phim Ngay</a>
-            </div>
+        <!-- Hiển thị phần nếu người dùng chưa đăng nhập -->
+        <div class="cinema-info">
+            <h2>Chào mừng đến với CBD Cinema!</h2>
+            <p>Trải nghiệm những bộ phim mới nhất với chất lượng âm thanh và hình ảnh tuyệt đỉnh.</p>
+            <a href="movies.jsp" class="btn1">Xem Phim Ngay</a>
+        </div>
 
 
         <% } %>

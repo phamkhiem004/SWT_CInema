@@ -162,6 +162,7 @@
 
         <!--header.jsp -->
         <jsp:include page="header.jsp" />
+        
 
         <div class="theater-list">
             <h2>Rạp chiếu</h2>

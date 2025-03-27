@@ -11,7 +11,212 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>My Profile - Web Bán Vé Xem Phim</title>
-        <link rel="stylesheet" href="css/profilestyles.css">
+        <style>
+            /* Tổng quan */
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f8f9fa;
+                margin: 0;
+                padding: 0;
+            }
+
+            .container {
+                width: 80%;
+                margin: 20px auto;
+                background: #fff;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            /* Tiêu đề chính */
+            h1 {
+                text-align: center;
+                color: #ff6600;
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+
+            /* Form chỉnh sửa thông tin */
+            .profile-container, .password-container {
+                background: #ffffff;
+                padding: 20px;
+                margin-bottom: 20px;
+                border-radius: 8px;
+                box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            label {
+                font-weight: bold;
+                display: block;
+                margin-top: 10px;
+                color: #333;
+            }
+
+            input, select {
+                width: 100%;
+                padding: 8px;
+                margin-top: 5px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+            }
+
+            button {
+                background-color: #ff6600;
+                color: white;
+                border: none;
+                padding: 10px;
+                width: 100%;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 16px;
+                margin-top: 15px;
+            }
+
+            button:hover {
+                background-color: #e65c00;
+            }
+
+            /* Thông báo */
+            small {
+                display: block;
+                margin-top: 5px;
+            }
+
+            small.error-message {
+                color: red;
+            }
+
+            small.success-message {
+                color: green;
+            }
+
+            /* 🎟 Lịch sử giao dịch */
+            .history-container {
+                width: 100%;
+                text-align: center;
+                padding: 20px;
+                background: #ffffff;
+                border-radius: 8px;
+                box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            .transaction-table {
+                width: 90%;
+                margin: 0 auto;
+                border-collapse: collapse;
+                background: #fff;
+                border-radius: 8px;
+                overflow: hidden;
+            }
+
+            .transaction-table th {
+                background-color: #ff6600;
+                color: white;
+                padding: 12px;
+                text-transform: uppercase;
+            }
+
+            .transaction-table td {
+                padding: 10px;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .transaction-table tr:hover {
+                background-color: #f1f1f1;
+            }
+
+            /* Nút hành động */
+            .btn {
+                display: inline-block;
+                padding: 8px 12px;
+                text-decoration: none;
+                font-size: 14px;
+                border-radius: 4px;
+                margin: 5px;
+            }
+
+            .btn-info {
+                background-color: #007bff;
+                color: white;
+            }
+
+            .btn-info:hover {
+                background-color: #0056b3;
+            }
+
+            .btn-danger {
+                background-color: #dc3545;
+                color: white;
+            }
+
+            .btn-danger:hover {
+                background-color: #b02a37;
+            }
+            .container {
+                display: flex;
+                justify-content: space-between;
+                gap: 20px;
+                max-width: 90%;
+                margin: 20px auto;
+            }
+
+            /* Mỗi bảng chiếm 50% */
+            .profile-container,
+            .password-container {
+                width: 50%;
+                background: #ffffff;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            /* Tiêu đề */
+            h2 {
+                text-align: center;
+                color: #ff6600;
+                font-size: 22px;
+                margin-bottom: 15px;
+            }
+
+            /* Form input */
+            input, select {
+                width: 100%;
+                padding: 8px;
+                margin-top: 5px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+            }
+
+            /* Nút */
+            button {
+                width: 100%;
+                padding: 10px;
+                margin-top: 15px;
+                background-color: #ff6600;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 16px;
+            }
+
+            button:hover {
+                background-color: #e65c00;
+            }
+
+            /* Responsive: Nếu màn hình nhỏ, hiển thị dọc */
+            @media (max-width: 768px) {
+                .profile-wrapper {
+                    flex-direction: column;
+                }
+                .profile-container, .password-container {
+                    width: 100%;
+                }
+            }
+
+
+        </style>
     </head>
     <body>
 
@@ -21,7 +226,7 @@
             <!-- Chỉnh sửa thông tin cá nhân -->
             <div class="profile-container">
                 <h1>Thông Tin Cá Nhân</h1>
-                <form id="profile-form"action="updateProfile?id=${u.id}&action=profile" method="POST">
+                <form id="profile-form"action="updateprofile?id=${u.id}&action=profile" method="POST">
                     <label for="full-name">Họ tên:</label>
                     <input type="text" id="full-name" name="fname" value="${u.fullname}" required minlength="3" maxlength="50">
                     <small class="error-message"></small>
@@ -60,7 +265,7 @@
             <!-- Thay đổi mật khẩu -->
             <div class="password-container">
                 <h1>Thay Đổi Mật Khẩu</h1>
-                <form id="password-form" action="updateProfile?id=${u.id}&action=pass" method="POST">
+                <form id="password-form" action="updateprofile?id=${u.id}&action=pass" method="POST">
                     <label for="current-password">Mật khẩu hiện tại:</label>
                     <input type="password" id="current-password" name="cpass" value="${requestScope.cpass}" required minlength="6">
                     <small class="error-message"></small>
@@ -94,18 +299,7 @@
         <div class="history-container">
             <h1>Lịch Sử Giao Dịch</h1>
 
-            <!-- 🔍 Bộ lọc thời gian -->
-            <div class="filter-container">
-                <form action="searchbill?id=${u.id}" method="POST">
-                    <label for="start-date">Từ:</label>
-                    <input type="date" id="start-date" name="sdate" value="${requestScope.sdate}">
 
-                    <label for="end-date">Đến:</label>
-                    <input type="date" id="end-date" name="edate" value="${requestScope.edate}">
-
-                    <button>Lọc</button>
-                </form>
-            </div>
 
             <!-- 📋 Bảng lịch sử giao dịch -->
             <table class="transaction-table">
@@ -116,9 +310,27 @@
                         <th>Total Price</th>
                         <th>Payment Method</th>
                         <th>Payment Status</th>
-                        <th>Detail</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
-            </table></div>
-            <jsp:include page="footer.jsp" />
+                <tbody>
+                    <c:forEach var="bill" items="${listB}">
+                        <tr>
+                            <td>${bill.showtimeID}</td> <!-- Thay bằng Movie Name nếu có -->
+                            <td>${bill.bookingDate}</td>
+                            <td>${bill.totalAmount}</td>
+                            <td>${bill.paymentMethod}</td>
+                            <td>${bill.paymentStatus}</td>
+                            <td>
+                                <a href="billdetail?billingID=${bill.billingID}" class="btn btn-info">View</a>
+                                <c:if test="${bill.paymentStatus eq 'Pending'}">
+                                    <a href="continueBilling?billingID=${bill.billingID}" class="btn btn-info">Continue</a>    
+                                </c:if>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
+        <jsp:include page="footer.jsp" />
     <tbody>

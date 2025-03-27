@@ -13,6 +13,7 @@
 <%@page import="model.Account"%>
 <%@ page import="java.util.*, java.time.format.DateTimeFormatter" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -122,7 +123,9 @@
     </head>
     <body>
         <jsp:include page="header.jsp" />
-
+        <%
+                           Account account = (Account) session.getAttribute("account");
+        %>
 
         <%
             Cinema cinema = (Cinema) request.getAttribute("Cinema");
@@ -131,7 +134,14 @@
         %>
 
 
-        <h1><%= cinema.getName() %></h1>
+        <div class="header-container">
+            <h1><%= cinema.getName() %></h1>
+
+            <% if (account != null && ("Admin".equals(account.getRole()) || "Staff".equals(account.getRole()))) { %>
+            <a href="ShowTimeServlet" class="back-link">Quản lý giờ chiếu</a>
+            <% } %>
+        </div>
+
         <p>Địa chỉ: <%= cinema.getAddress() %></p>
         <img class="theater-image" src="image/<%= cinema.getImageURL() %>" alt="<%= cinema.getName() %>">
 
@@ -180,13 +190,7 @@
         %>
 
         <div class="button-container">
-            <a href="theaterfilter" class="back-link">Quay về danh sách rạp</a>
-            <%
-                    Account account = (Account) session.getAttribute("account");
-            %>
-            <% if (account != null && ("Admin".equals(account.getRole()) || "Customer".equals(account.getRole()))) { %>
-            <a href="addscreening.jsp" class="back-link">Thêm giờ chiếu</a>
-            <% } %>
+            <a href="theaterfilter" class="back-link">Quay về danh sách rạp</a>        
         </div>
         <jsp:include page="footer.jsp" />
     </body>

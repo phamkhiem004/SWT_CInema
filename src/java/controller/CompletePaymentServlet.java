@@ -27,7 +27,7 @@ public class CompletePaymentServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+
         String billingID = request.getParameter("billingID");
 
         if (billingID == null || billingID.isEmpty()) {
@@ -50,6 +50,10 @@ public class CompletePaymentServlet extends HttpServlet {
 
         // Lấy danh sách combo
         List<BillingCombo> combos = billingDAO.getCombosByBillingID(billingID);
+        
+        for (BillingCombo combo : combos) {
+            new BillingDAO().updateQuantity(combo.getComboID(), combo.getQuantity());
+        }
 
         // Lấy thông tin phòng và phim
         int roomID = billingDAO.getRoomIDByShowtimeID(billing.getShowtimeID());
@@ -62,7 +66,7 @@ public class CompletePaymentServlet extends HttpServlet {
         String userEmail = billingDAO.getEmailByUserID(billing.getUserID()); // Cần lấy email từ UserDAO
         sendPaymentEmail(userEmail, seatNames, combos, totalAmount, roomID, movieName);
 
-        response.getWriter().write("Payment completed successfully and email sent.");
+        response.sendRedirect("billing");
     }
 
     private void sendPaymentEmail(String toEmail, List<String> seatNames, List<BillingCombo> combos, BigDecimal totalAmount, int roomID, String movieName) {

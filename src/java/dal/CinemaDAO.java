@@ -128,7 +128,7 @@ public class CinemaDAO extends DBContext {
         String sql = "Select DISTINCT Movie.MovieID, Title, Movie.Poster from Cinema \n"
                 + "Join Room ON Cinema.CinemaID = Room.CinemaID\n"
                 + "Join ShowTime ON Room.RoomID = ShowTime.RoomID\n"
-                + "Join Movie ON ShowTime.MovieID = Movie.MovieID where Cinema.CinemaID = ? ";
+                + "Join Movie ON ShowTime.MovieID = Movie.MovieID where Cinema.CinemaID = ? and Showtime.Status ='Active' and Movie.Status = 'Active'";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, TheaterID);
@@ -150,7 +150,7 @@ public class CinemaDAO extends DBContext {
     }
 
     public ShowTime getScreeningTimeByTheaterID(int cinemaID) {
-        String sql = "SELECT * from ShowTime Join Room ON Room.RoomID = ShowTime.RoomID WHERE CinemaID = ?";
+        String sql = "SELECT * from ShowTime Join Room ON Room.RoomID = ShowTime.RoomID WHERE CinemaID = ? and Showtime.Status = 'Active'";
         ShowTime theater = null;
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {

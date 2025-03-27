@@ -71,27 +71,34 @@ public class ChooseComboServlet extends HttpServlet {
         String discountCode = request.getParameter("discountCode");
         String paymentMethod = request.getParameter("paymentMethod");
 
-        BigDecimal totalAmount = BigDecimal.ZERO;
-        if (comboIDs != null && quantities != null) {
-            for (int i = 0; i < comboIDs.length; i++) {
-                int comboID = Integer.parseInt(comboIDs[i]);
-                int quantity = Integer.parseInt(quantities[i]);
-                BigDecimal comboPrice = comboDAO.getComboPrice(comboID);
-                totalAmount = totalAmount.add(comboPrice.multiply(BigDecimal.valueOf(quantity)));
-                billingComboDAO.addComboToBilling(billingID, comboID, quantity, comboPrice);
-            }
-        }
-
         Discount discount = discountDAO.getDiscountByCode(discountCode);
-        if (discount != null) {
-            discountDAO.applyDiscount(billingID, discount.getDiscountID(), discount.getDiscountPercentage());
+        if (discount != null || discountCode.isEmpty()) {
+            BigDecimal totalAmount = BigDecimal.ZERO;
+            if (comboIDs != null && quantities != null) {
+                for (int i = 0; i < comboIDs.length; i++) {
+                    int comboID = Integer.parseInt(comboIDs[i]);
+                    int quantity = Integer.parseInt(quantities[i]);
+                    BigDecimal comboPrice = comboDAO.getComboPrice(comboID);
+                    totalAmount = totalAmount.add(comboPrice.multiply(BigDecimal.valueOf(quantity)));
+                    billingComboDAO.addComboToBilling(billingID, comboID, quantity, comboPrice);
+
+                }
+            }
+            billingDAO.updateTotalAmount(billingID, totalAmount);
+            billingDAO.updatePaymentMethod(billingID, paymentMethod);
+            if (!discountCode.isEmpty()) {
+                discountDAO.applyDiscount(billingID, discount.getDiscountID(), discount.getDiscountPercentage());
+                request.setAttribute("sucDiscount", "You got " + discount.getDiscountPercentage() + " % discount");
+            }
+            request.setAttribute("isApproved", true);
+        } else {
+            request.setAttribute("errDiscount", "Wrong discount code");
         }
 
-        billingDAO.updateTotalAmount(billingID, totalAmount);
-        billingDAO.updatePaymentMethod(billingID, paymentMethod);
-
-        response.sendRedirect("home");
+        doGet(request, response);
 
     }
 
 }
+
+
