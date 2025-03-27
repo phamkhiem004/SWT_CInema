@@ -77,7 +77,7 @@ public class CompletePaymentServlet extends HttpServlet {
                 .append("<p>Your payment has been successfully completed.</p>")
                 .append("<p><strong>Movie:</strong> ").append(movieName).append("</p>")
                 .append("<p><strong>Room:</strong> ").append(roomID).append("</p>")
-                .append("<p><strong>Total Amount:</strong> $").append(totalAmount).append("</p>")
+                .append("<p><strong>Total Amount:</strong> VNĐ").append(totalAmount).append("</p>")
                 .append("<h4>Seats:</h4><ul>");
 
         for (String seat : seatNames) {

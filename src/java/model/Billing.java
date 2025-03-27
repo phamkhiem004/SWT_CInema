@@ -5,7 +5,9 @@
 package model;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -21,6 +23,18 @@ public class Billing {
     private String paymentStatus;
     private Integer discountID;
     private Date bookingDate;
+    private String Title;
+    private double DiscountPercentage;
+    private LocalDateTime StartTime;
+    private List<String> seatNames;
+
+    public List<String> getSeatNames() {
+        return seatNames;
+    }
+
+    public void setSeatNames(List<String> seatNames) {
+        this.seatNames = seatNames;
+    }
 
     public Billing() {
     }
@@ -35,6 +49,54 @@ public class Billing {
         this.paymentStatus = paymentStatus;
         this.discountID = discountID;
         this.bookingDate = bookingDate;
+    }
+
+    public Billing(String billingID, int userID, int showtimeID, BigDecimal totalAmount, String paymentMethod, String paymentStatus, Integer discountID, Date bookingDate, String Title, double DiscountPercentage, LocalDateTime StartTime) {
+        this.billingID = billingID;
+        this.userID = userID;
+        this.showtimeID = showtimeID;
+        this.totalAmount = totalAmount;
+        this.paymentMethod = paymentMethod;
+        this.paymentStatus = paymentStatus;
+        this.discountID = discountID;
+        this.bookingDate = bookingDate;
+        this.Title = Title;
+        this.DiscountPercentage = DiscountPercentage;
+        this.StartTime = StartTime;
+    }
+
+    public Billing(String billingID, BigDecimal totalAmount, String paymentMethod, String paymentStatus, Date bookingDate, String Title) {
+        this.billingID = billingID;
+        this.totalAmount = totalAmount;
+        this.paymentMethod = paymentMethod;
+        this.paymentStatus = paymentStatus;
+        this.bookingDate = bookingDate;
+        this.Title = Title;
+    }
+    
+
+    public LocalDateTime getStartTime() {
+        return StartTime;
+    }
+
+    public void setStartTime(LocalDateTime StartTime) {
+        this.StartTime = StartTime;
+    }
+
+    public String getTitle() {
+        return Title;
+    }
+
+    public void setTitle(String Title) {
+        this.Title = Title;
+    }
+
+    public double getDiscountPercentage() {
+        return DiscountPercentage;
+    }
+
+    public void setDiscountPercentage(double DiscountPercentage) {
+        this.DiscountPercentage = DiscountPercentage;
     }
 
     public String getBillingID() {

@@ -305,18 +305,18 @@
             <table class="transaction-table">
                 <thead>
                     <tr>
-                        <th>Movie</th>
-                        <th>Booking Date</th>
-                        <th>Total Price</th>
-                        <th>Payment Method</th>
-                        <th>Payment Status</th>
-                        <th>Action</th>
+                        <th>Tên Phim</th>
+                        <th>Ngày Đặt Vé</th>
+                        <th>Tổng giá tiền</th>
+                        <th>Phương thức thanh toán</th>
+                        <th>Trạng thái</th>
+                        <th>Hành động</th>
                     </tr>
                 </thead>
                 <tbody>
                     <c:forEach var="bill" items="${listB}">
                         <tr>
-                            <td>${bill.showtimeID}</td> <!-- Thay bằng Movie Name nếu có -->
+                            <td>${bill.title}</td> <!-- Thay bằng Movie Name nếu có -->
                             <td>${bill.bookingDate}</td>
                             <td>${bill.totalAmount}</td>
                             <td>${bill.paymentMethod}</td>

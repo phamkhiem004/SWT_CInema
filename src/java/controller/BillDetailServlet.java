@@ -70,7 +70,7 @@ public class BillDetailServlet extends HttpServlet {
             throws ServletException, IOException {
         BillingDAO billingDAO = new BillingDAO();
         String billingID = request.getParameter("billingID");
-        Billing bill = billingDAO.getBillingById(billingID);
+        Billing bill = billingDAO.getBillingDetailById(billingID);
         
         request.setAttribute("bill", bill);
         request.getRequestDispatcher("BillDetail.jsp").forward(request, response);
