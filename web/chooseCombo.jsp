@@ -8,8 +8,7 @@
         <title>Chọn Combo</title>
         <!-- Bootstrap 5 -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="styles.css"> <%-- CSS tùy chỉnh nếu có --%>
-    </head>
+        <link rel="stylesheet" href="styles.css">     </head>
     <body>
 
         <jsp:include page="header.jsp" />
@@ -59,7 +58,7 @@
                 <div class="text-center mt-4">
                     <button type="submit" class="btn btn-primary btn-lg">✅ Xác nhận</button>
                     <c:if test="${isApproved == true}">
-                        <button type="button" class="btn btn-primary btn-lg"><a href="payment?billingID=${billingID}">Thanh Toan</a></button>
+                        <button type="button" class="btn btn-primary btn-lg"><a href="payment?billingID=${billingID}">Thanh Toán</a></button>
                     </c:if>
 
                 </div>

@@ -41,7 +41,7 @@ public class ComboDAO extends DBContext {
     }
      public List<Combo> getAllCombos() {
         List<Combo> combos = new ArrayList<>();
-        String sql = "SELECT * FROM Combo";
+        String sql = "SELECT * FROM Combo where Status = 'Active'";
         try (PreparedStatement ps = connection.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
