@@ -42,12 +42,15 @@ public class BillingDAO extends DBContext {
     }
 
     public Billing getBillingDetailById(String billingID) {
-        String query = "SELECT Billing.BillingID, Title, BookingDate, TotalAmount, PaymentMethod, PaymentStatus, DiscountPercentage, StartTime, Discount.DiscountID, SeatName "
-                + "FROM Billing "
-                + "JOIN Showtime ON Billing.ShowtimeID = Showtime.ShowtimeID "
-                + "LEFT JOIN Discount ON Discount.DiscountID = Billing.DiscountID "
-                + "JOIN Movie ON Movie.MovieID = Showtime.MovieID "
-                + "JOIN Billing_Seat ON Billing.BillingID = Billing_Seat.BillingID "
+        String query = "SELECT Billing.BillingID, Title, BookingDate, TotalAmount, PaymentMethod, PaymentStatus, DiscountPercentage, StartTime,Room.Name AS RoomName,  \n"
+                + "    Cinema.Name AS CinemaName, Discount.DiscountID, SeatName \n"
+                + "FROM Billing \n"
+                + "JOIN Showtime ON Billing.ShowtimeID = Showtime.ShowtimeID \n"
+                + "LEFT JOIN Discount ON Discount.DiscountID = Billing.DiscountID \n"
+                + "JOIN Movie ON Movie.MovieID = Showtime.MovieID \n"
+                + "JOIN Billing_Seat ON Billing.BillingID = Billing_Seat.BillingID \n"
+                + " Left Join Room On Showtime.RoomID = Room.RoomID\n"
+                + "Left Join Cinema On Room.CinemaID = Cinema.CinemaID "
                 + "WHERE Billing.BillingID = ?";
 
         try (PreparedStatement ps = connection.prepareStatement(query)) {
@@ -63,6 +66,8 @@ public class BillingDAO extends DBContext {
                     billing.setTitle(rs.getString("Title"));
                     billing.setBookingDate(rs.getDate("BookingDate"));
                     billing.setStartTime(rs.getTimestamp("StartTime").toLocalDateTime());
+                    billing.setRoomName(rs.getString("RoomName")); // Gán chỉ một lần
+                    billing.setCinemaName(rs.getString("CinemaName"));
                     billing.setTotalAmount(rs.getBigDecimal("TotalAmount"));
                     billing.setPaymentMethod(rs.getString("PaymentMethod"));
                     billing.setPaymentStatus(rs.getString("PaymentStatus"));

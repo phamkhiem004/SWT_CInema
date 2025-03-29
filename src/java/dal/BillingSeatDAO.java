@@ -64,5 +64,19 @@ public class BillingSeatDAO extends DBContext {
         }
         return myBookedSeats;
     }
+    public float getSeatPrice(int seatID) {
+        List<String> myBookedSeats = new ArrayList<>();
+        String sql = "SELECT Price from Seat where SeatID = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, seatID);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getFloat(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 
 }

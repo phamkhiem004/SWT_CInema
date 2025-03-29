@@ -74,11 +74,11 @@ public class BookingServlet extends HttpServlet {
         for (String seat : selectedSeats) {
             char row = seat.charAt(0);
             if ("ABIK".indexOf(row) >= 0) {
-                totalAmount = totalAmount.add(new BigDecimal(50));
+                totalAmount = totalAmount.add(new BigDecimal(new BillingSeatDAO().getSeatPrice(1)));
             } else if ("CDEFG".indexOf(row) >= 0) {
-                totalAmount = totalAmount.add(new BigDecimal(100));
+                totalAmount = totalAmount.add(new BigDecimal(new BillingSeatDAO().getSeatPrice(2)));
             } else if (row == 'H') {
-                totalAmount = totalAmount.add(new BigDecimal(150));
+                totalAmount = totalAmount.add(new BigDecimal(new BillingSeatDAO().getSeatPrice(3)));
             }
         }
 

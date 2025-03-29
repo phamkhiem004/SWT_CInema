@@ -311,6 +311,7 @@
                         <th>Phương thức thanh toán</th>
                         <th>Trạng thái</th>
                         <th>Hành động</th>
+                        <th>Huỷ đơn</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -326,6 +327,14 @@
                                 <c:if test="${bill.paymentStatus eq 'Pending'}">
                                     <a href="continueBilling?billingID=${bill.billingID}" class="btn btn-info">Continue</a>    
                                 </c:if>
+                            </td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${bill.paymentStatus == 'Pending'}">                                      
+                                        <a href="declineBill?billingID=${bill.billingID}&action=decline" class="btn btn-danger">Decline</a>
+                                    </c:when>
+                                    
+                                </c:choose>
                             </td>
                         </tr>
                     </c:forEach>

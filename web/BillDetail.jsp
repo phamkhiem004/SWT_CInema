@@ -100,6 +100,8 @@
                     <tr><th>Mã Hóa Đơn:</th><td><%= bill.getBillingID() %></td></tr>
                     <tr><th>Tên Suất Chiếu:</th><td><%= bill.getTitle() %></td></tr>
                     <tr><th>Giờ chiếu:</th><td><%= bill.getStartTime() %></td></tr>
+                    <tr><th>Phòng chiếu:</th><td><%= bill.getRoomName() %></td></tr>
+                    <tr><th>Rạp chiếu:</th><td><%= bill.getCinemaName() %></td></tr>
                     <tr><th>Tổng Tiền:</th><td><%= bill.getTotalAmount() %> VNĐ</td></tr>
                     <tr><th>Phương Thức Thanh Toán:</th><td><%= bill.getPaymentMethod() %></td></tr>
                     <tr><th>Trạng Thái Thanh Toán:</th><td><%= bill.getPaymentStatus() %></td></tr>
