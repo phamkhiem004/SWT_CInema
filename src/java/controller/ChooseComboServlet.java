@@ -83,7 +83,7 @@ public class ChooseComboServlet extends HttpServlet {
                     billingComboDAO.addComboToBilling(billingID, comboID, quantity, comboPrice);
 
                 }
-            }
+            }        
             billingDAO.updateTotalAmount(billingID, totalAmount);
             billingDAO.updatePaymentMethod(billingID, paymentMethod);
             if (!discountCode.isEmpty()) {

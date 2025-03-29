@@ -16,10 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.Account;
 import model.Billing;
 
-/**
- *
- * @author SHD
- */
+
 public class PaymentServlet extends HttpServlet {
 
     /**
@@ -77,7 +74,7 @@ public class PaymentServlet extends HttpServlet {
 
         request.setAttribute("billing", billing);
         request.setAttribute("user", user);
-        request.setAttribute("discountedTotal", discountedTotal);
+        request.setAttribute("discountedTotal", billing.getTotalAmount());
         request.setAttribute("paymentContent", paymentContent);
 
         request.getRequestDispatcher("payment.jsp").forward(request, response);

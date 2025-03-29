@@ -171,7 +171,7 @@ public class DiscountDAO extends DBContext {
     }
 
     public void applyDiscount(String billingID, int discountID, float discountPercentage) {
-        String sql = "UPDATE Billing SET DiscountID = ?, TotalAmount = TotalAmount * (1 - ? / 100) WHERE BillingID = ? and Discount.Status = 'Active' ";
+        String sql = "UPDATE Billing SET DiscountID = ?, TotalAmount = TotalAmount * (1 - ? / 100) WHERE BillingID = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, discountID);
             ps.setFloat(2, discountPercentage);

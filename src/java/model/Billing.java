@@ -26,6 +26,8 @@ public class Billing {
     private String Title;
     private double DiscountPercentage;
     private LocalDateTime StartTime;
+    private String RoomName;
+    private String CinemaName;
     private List<String> seatNames;
 
     public List<String> getSeatNames() {
@@ -73,7 +75,22 @@ public class Billing {
         this.bookingDate = bookingDate;
         this.Title = Title;
     }
-    
+
+    public String getCinemaName() {
+        return CinemaName;
+    }
+
+    public void setCinemaName(String CinemaName) {
+        this.CinemaName = CinemaName;
+    }
+
+    public String getRoomName() {
+        return RoomName;
+    }
+
+    public void setRoomName(String RoomName) {
+        this.RoomName = RoomName;
+    }
 
     public LocalDateTime getStartTime() {
         return StartTime;
